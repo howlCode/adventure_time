@@ -1,0 +1,8 @@
+<div>
+  <h1>Stories Will Go Here.</h1>
+
+  <% @stories.each do |story| %>
+    <h2><%= story.title %></h2>
+    <p><%= story.body %></p>
+  <% end %>
+</div>

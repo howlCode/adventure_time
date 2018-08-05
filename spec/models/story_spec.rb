@@ -6,6 +6,7 @@ RSpec.describe Story, type: :model do
 
   it "is valid with valid attributes" do
     story = Story.create!(title: "test title", body: "test body", user: user)
+    expect(story).to be_valid
   end
 
   it "is not valid without a title and/or body" do

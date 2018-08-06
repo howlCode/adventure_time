@@ -1,3 +1,27 @@
 // Place all the styles related to the stories controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import url("https://fonts.googleapis.com/css?family=Kirang+Haerang");
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700");
+
+* {
+  font-family: "Lato", sans-serif;
+}
+
+#logo {
+  font-family: "Kirang Haerang", cursive;
+  font-size: 5rem;
+  line-height: 2rem;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
+.card-header-title {
+  font-size: 2rem;
+  text-transform: capitalize;
+  letter-spacing: 0.1rem;
+}
+
+.content {
+  font-size: 1.2rem;
+}

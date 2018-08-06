@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_131353) do
+ActiveRecord::Schema.define(version: 2018_08_06_184848) do
+
+  create_table "arcs", force: :cascade do |t|
+    t.integer "story_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["story_id"], name: "index_arcs_on_story_id"
+  end
 
   create_table "stories", force: :cascade do |t|
     t.string "title", null: false

@@ -1,8 +1,31 @@
-<div>
-  <h1>Stories Will Go Here.</h1>
-
-  <% @stories.each do |story| %>
-    <h2><%= story.title %></h2>
-    <p><%= story.body %></p>
-  <% end %>
-</div>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <% @stories.each do |story| %>
+        <div class="column is-half">
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                <%= story.title %>
+              </p>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                <p>"
+                  <%= story.body %>"</p>
+                <span class="is-italic is-pulled-right">
+                  --
+                  <%= story.display_username %>
+                </span>
+                <br>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <a href="#" class="card-footer-item">Save</a>
+            </footer>
+          </div>
+        </div>
+        <% end %>
+    </div>
+  </div>
+</section>

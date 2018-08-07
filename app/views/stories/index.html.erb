@@ -9,10 +9,11 @@
                 <%= story.title %>
               </p>
             </header>
+            <%= link_to story_path(story), class: "has-text-dark" do %>
             <div class="card-content">
               <div class="content">
-                <p>"
-                  <%= story.body %>"</p>
+                  <p>"
+                  <%= story.snipped_body %>"</p>               
                 <span class="is-italic is-pulled-right">
                   --
                   <%= story.display_username %>
@@ -20,9 +21,10 @@
                 <br>
               </div>
             </div>
+            <% end %>
             <footer class="card-footer">
-              <%= link_to "See the Full Story", story_path(story), class: "card-footer-item" %>
-                <%= link_to "Create A Story Arc", new_story_arc_path(story), class: "card-footer-item" %>
+              <%= link_to "View Full Story", story_path(story), class: "card-footer-item" %>
+              <%= link_to "Submit A Story Arc", new_story_arc_path(story), class: "card-footer-item" %>
             </footer>
           </div>
         </div>

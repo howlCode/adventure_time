@@ -6,4 +6,8 @@ class Story < ApplicationRecord
   def display_username
     self.user.email
   end
+
+  def snipped_body
+    self.body.truncate(200, omission: '... (click to read full story)')
+  end
 end

@@ -1,16 +1,8 @@
 <section class="section">
-
-  <div>
-    <h1 id="logo" class="has-text-centered">Adventure Time!</h1>
-    <p class="has-text-centered"><%= link_to "Create a New Story!", new_story_path(current_user) %></p>
-    <p class="has-text-centered"><%= link_to "Sign in", new_user_session_path %></p>
-  </div>
-  <br>
-
   <div class="container">
     <div class="columns">
       <% @stories.each do |story| %>
-        <div class="column is-half">
+        <div class="column">
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">
@@ -30,7 +22,7 @@
             </div>
             <footer class="card-footer">
               <%= link_to "See the Full Story", story_path(story), class: "card-footer-item" %>
-              <%= link_to "Create A Story Arc", new_story_arc_path(story), class: "card-footer-item" %>
+                <%= link_to "Create A Story Arc", new_story_arc_path(story), class: "card-footer-item" %>
             </footer>
           </div>
         </div>

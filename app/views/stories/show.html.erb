@@ -8,6 +8,10 @@
       </div>
       <div class="message-body">
         <%= @story.body %>
+        <span class="is-italic is-pulled-right">
+          --
+          <%= @story.display_username %>
+        </span>
       </div>
     </article>
   </div>

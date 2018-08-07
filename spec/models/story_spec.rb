@@ -13,5 +13,5 @@ RSpec.describe Story, type: :model do
     story = Story.new(title: nil, body: nil, user: nil)
     expect(story).to_not be_valid
   end
-
+  
 end

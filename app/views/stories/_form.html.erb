@@ -1,35 +1,41 @@
-<section class="section form">
-  <div class="container">
+<div class="container">
 
-    <%= form_for @story do |form| %>
+  <%= form_for @story do |form| %>
 
-      <% if @story.errors.any? %>
-        <div id="error_explanation">
-          <h2>
-            <%= pluralize(@story.errors.count, "Error") %>
+    <% if @story.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@story.errors.count, "Error") %>
             prohibited this story from being created:
-          </h2>
-          <% @story.errors.full_messages.each do |msg| %>
-            <small><%= msg %></small>
+        </h2>
+        <% @story.errors.full_messages.each do |msg| %>
+          <small>
+            <%= msg %>
+          </small>
           <% end %>
+      </div>
+      <% end %>
+
+        <div class="field">
+          <%= label_tag(:title, "Title Your Story", class: "text-light label") %>
+            <div class="control">
+              <%= form.text_field :title, class: "input" %>
+            </div>
         </div>
-      <% end %>
 
-      <div class="form-group">
-        <%= label_tag(:title, "Title Your Story", class: "text-light") %>
-        <%= form.text_field :name, class: "form-control" %>
-      </div>
+        <div class="field">
+          <%= label_tag(:body, "Your Story...", class: "text-light label") %>
+            <div class="control">
+              <%= form.text_area :body, class: "input textarea", rows: 15 %>
+            </div>
+        </div>
 
-      <div class="form-group">
-        <%= label_tag(:body, "Your Story...", class: "text-light") %>
-        <%= form.text_field :name, class: "form-control" %>
-      </div>
+        <div class="field">
+          <div class="control">
+            <%= form.submit "Submit", class: "button is-success" %>
+          </div>
+        </div>
 
-      <div class="form-group">
-        <%= form.submit "Submit", class: "btn btn-success" %>
-      </div>
+        <% end %>
 
-      <% end %>
-
-  </div>
-</section>
+</div>

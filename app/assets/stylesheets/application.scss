@@ -14,3 +14,23 @@
  *= require_self
  */
 @import "bulma";
+
+#logo {
+  font-family: "Kirang Haerang", cursive;
+  font-size: 5rem;
+  line-height: 2rem;
+  padding: 20px;
+  margin-bottom: 50px;
+  text-decoration: none;
+  color: black;
+}
+
+#logo:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.forms {
+  margin: 0 auto;
+  width: 30%;
+}

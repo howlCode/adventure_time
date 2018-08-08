@@ -1,0 +1,39 @@
+<div class="container">
+    <a href="/">
+      <h1 id="logo" class="has-text-centered">Adventure Time!</h1>
+    </a>
+    
+  <%= form_for [@story, @arc] do |form| %>
+
+    <% if @arc.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@arc.errors.count, "Error") %>
+            prohibited this story-arc from being created:
+        </h2>
+        <% @arc.errors.full_messages.each do |msg| %>
+          <small>
+            <%= msg %>
+          </small>
+          <% end %>
+      </div>
+      <% end %>
+
+        <div class="field">
+          <%= label_tag(:body, "Your Story-Arc...", class: "text-light label") %>
+            <div class="control">
+              <%= form.text_area :body, class: "input textarea", rows: 15 %>
+            </div>
+        </div>
+
+        <%= form.hidden_field :story_id %>
+
+          <div class="field">
+            <div class="control">
+              <%= form.submit "Submit", class: "button is-success" %>
+            </div>
+          </div>
+
+          <% end %>
+
+</div>

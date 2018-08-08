@@ -16,8 +16,6 @@
       <%= render 'partials/header' %>
     <% end %>
     <%= yield %>
-    <% unless action_name == "new" %>
-      <%= render 'partials/footer' %>
-    <% end %>
+    <%= render 'partials/footer' %>
   </body>
 </html>

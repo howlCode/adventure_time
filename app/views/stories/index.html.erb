@@ -6,7 +6,7 @@
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">
-                <%= story.title %>
+                <%= story.snipped_title %>
               </p>
             </header>
             <%= link_to story_path(story), class: "has-text-dark" do %>
@@ -24,7 +24,7 @@
             <% end %>
             <footer class="card-footer">
               <%= link_to "View Full Story", story_path(story), class: "card-footer-item" %>
-              <%= link_to "Submit A Story Arc", new_story_arc_path(story), class: "card-footer-item" %>
+              <%= link_to "Submit A Story Arc", new_story_arc_path(story_id: story.id), class: "card-footer-item" %>
             </footer>
           </div>
         </div>

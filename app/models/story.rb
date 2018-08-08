@@ -10,4 +10,8 @@ class Story < ApplicationRecord
   def snipped_body
     self.body.truncate(200, omission: '... (click to read full story)')
   end
+
+  def snipped_title
+    self.title.truncate(50, omission: '... ')
+  end
 end

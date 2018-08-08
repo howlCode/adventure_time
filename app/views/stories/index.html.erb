@@ -3,29 +3,26 @@
     <div class="columns">
       <% @stories.each do |story| %>
         <div class="column">
-          <div class="card">
-            <header class="card-header">
-              <p class="card-header-title">
+          <div class="message is-medium">
+            <header class="message-header">
+              <p class="message-header-title">
                 <%= story.snipped_title %>
               </p>
+              <%= link_to "Submit A Story Arc", new_story_arc_path(story_id: story.id), class: "button is-outlined is-light" %>
             </header>
             <%= link_to story_path(story), class: "has-text-dark" do %>
-            <div class="card-content">
-              <div class="content">
-                  <p>"
-                  <%= story.snipped_body %>"</p>               
-                <span class="is-italic is-pulled-right">
-                  --
-                  <%= story.display_username %>
-                </span>
+              <div class="message-body index-story">
+                <p>"
+                  <%= story.snipped_body %>"
+                </p>
                 <br>
+
               </div>
-            </div>
-            <% end %>
-            <footer class="card-footer">
-              <%= link_to "View Full Story", story_path(story), class: "card-footer-item" %>
-              <%= link_to "Submit A Story Arc", new_story_arc_path(story_id: story.id), class: "card-footer-item" %>
-            </footer>
+              <span class="is-italic is-pulled-right">
+                -- Submitted by:
+                <%= story.display_username %>
+              </span>
+              <% end %>
           </div>
         </div>
         <% end %>

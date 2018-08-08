@@ -4,16 +4,10 @@
 @import url("https://fonts.googleapis.com/css?family=Kirang+Haerang");
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700");
 
-* {
-  font-family: "Lato", sans-serif;
-}
-
-.card-header-title {
-  font-size: 2rem;
+.message-header-title {
   text-transform: capitalize;
-  letter-spacing: 0.1rem;
 }
 
-.content {
-  font-size: 1.2rem;
+.index-story {
+  height: 190px;
 }

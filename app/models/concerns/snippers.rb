@@ -8,7 +8,7 @@ module Snippers
   end
 
   def snipped_title
-    self.title.truncate(35, omission: '... ')
+    self.title.truncate(30, omission: '... ')
   end
 
   def snipped_body

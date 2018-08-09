@@ -1,0 +1,43 @@
+<section class="section">
+  <div class="container">
+    <div class="message is-medium">
+      <header class="message-header">
+        <p class="message-header-title">
+          <%= @story.title %>
+        </p>
+      </header>
+      <div class="message-body index-story">
+        <p>"
+          <%= @story.snipped_body %>"
+        </p>
+        <br>
+      </div>
+      <span class="is-italic is-pulled-right">
+        -- Submitted by:
+        <%= @story.display_username %>
+      </span>
+    </div>
+    <br>
+    <br>
+    <div class="columns">
+      <% @arcs.each do |arc| %>
+        <div class="column">
+          <div class="message">
+            <header class="message-header">
+              <p class="message-header-title">
+                -- Submitted by:
+                <%= arc.display_username %>
+              </p>
+            </header>
+            <div class="message-body index-story">
+              <p>"
+                <%= arc.snipped_body %>"
+              </p>
+              <br>
+            </div>
+          </div>
+        </div>
+        <% end %>
+    </div>
+  </div>
+</section>

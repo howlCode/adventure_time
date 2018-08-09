@@ -1,7 +1,14 @@
 class ArcsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_story, only: [:new, :create]
-  before_action :set_arc, only: [:destroy]
+  before_action :load_story, only: [:new, :create, :index]
+  before_action :set_arc, except: [:new, :create, :index]
+
+  def index
+    @arcs = @story.arcs.all
+  end
+
+  def show
+  end
 
   def new
     @arc = current_user.arcs.build(story_id: params[:story_id])

@@ -1,6 +1,6 @@
 class ArcsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_story, only: [:new, :create, :index]
+  before_action :load_story
   before_action :set_arc, except: [:new, :create, :index]
 
   def index
@@ -31,7 +31,7 @@ class ArcsController < ApplicationController
 
   private
     def set_arc
-      @arc = Story.arcs.find(params[:id])
+      @arc = @story.arcs.find(params[:id])
     end
 
     def load_story

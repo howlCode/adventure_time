@@ -1,0 +1,17 @@
+<section class="section">
+  <div class="container">
+    <article class="message is-medium">
+      <div class="message-header">
+        <p>
+          --
+          <%= @arc.display_username %>
+        </p>
+      </div>
+      <div class="message-body">
+        <%= @arc.body %>
+      </div>
+    </article>
+    <%= link_to "Top", '#logo', class: "button is-outlined is-dark" %>
+    <%= link_to "Back", story_arcs_path(@story), class: "button is-outlined is-info" %>
+  </div>
+</section>

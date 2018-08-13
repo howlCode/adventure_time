@@ -31,12 +31,14 @@
                 <%= arc.display_username %>
               </p>
             </header>
-            <div class="message-body index-story">
-              <p>"
-                <%= arc.snipped_body %>"
-              </p>
-              <br>
-            </div>
+            <%= link_to story_arc_path(id: arc.id) do %>
+              <div class="message-body index-story">
+                <p>"
+                  <%= arc.snipped_body %>"
+                </p>
+                <br>
+              </div>
+              <% end %>
           </div>
         </div>
         <% end %>

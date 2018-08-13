@@ -19,7 +19,7 @@
       </span>
     </div>
     <br>
-    <h2 class="has-text-centered">Vote On The Next Arc!</h2>
+    <h1 class="has-text-centered">Vote On The Next Arc!</h1>
     <br>
     <div class="columns">
       <% @arcs.each do |arc| %>
@@ -27,8 +27,12 @@
           <div class="message">
             <header class="message-header">
               <p class="message-header-title">
-                -- Submitted by:
-                <%= arc.display_username %>
+              <span class="button is-info is-inverted">
+              Current votes: <%= arc.votes.count %>
+              </span>
+              <span class="button is-inverted is-primary">
+                <%= link_to "Vote!", story_arc_votes_path(arc_id: arc.id), method: :post, remote: true %>
+              </span>
               </p>
             </header>
             <%= link_to story_arc_path(id: arc.id) do %>
@@ -36,8 +40,8 @@
                 <p>"
                   <%= arc.snipped_body %>"
                 </p>
-                <%= link_to "Vote Up!", arc.vote_up class: "button is-info" %>
                 <br>
+                -- <%= arc.display_username %>
               </div>
               <% end %>
           </div>

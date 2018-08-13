@@ -2,7 +2,7 @@
   <a href="/">
     <h1 id="logo" class="has-text-centered">Adventure Time!</h1>
   </a>
-  <div>
+  <div class="has-text-centered">
   <% if controller_name == "stories" && action_name == "index" %>
     <%= link_to "Create a New Story!", new_story_path, class: "button is-outlined is-dark" %>
       <% if !user_signed_in? %>

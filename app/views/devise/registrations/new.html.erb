@@ -2,7 +2,8 @@
   <a href="/">
     <h1 id="logo" class="has-text-centered">Adventure Time!</h1>
   </a>
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
     <div class="forms">
       <div class="field">
         <%= f.label :email, class: "label" %>
@@ -13,14 +14,23 @@
 
       <div class="field">
         <%= f.label :password, class: "label" %>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
           <div class="control">
             <%= f.password_field :password, autocomplete: "off", class: "input" %>
           </div>
       </div>
 
+      <div class="field">
+        <%= f.label :password_confirmation, class: "label" %>
+      <div class="control">
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "input" %>
+      </div>   
+    </div>
+
       <div class="is-grouped is-grouped-left">
-        <%= f.submit "Log in", class: "button is-outlined is-dark" %>
-        <%= link_to "Sign Up", new_user_registration_path, class: "button is-outlined is-info"%>
+        <%= f.submit "Sign Up", class: "button is-outlined is-dark" %>
       </div>
       <% end %>
     </div>

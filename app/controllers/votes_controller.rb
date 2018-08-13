@@ -1,13 +1,20 @@
 class VotesController < ApplicationController
+  include Voting
   before_action :authenticate_user!
 
   def create
-    @story = Story.find(:story_id)
-    @vote = Vote.new(vote_params)
-    if @vote.save
-      redirect_to story_arcs_path(@story)
+    @user = current_user
+    @arc = Arc.find(params[:arc_id])
+
+    if has_voted?(@user, @arc)
+      render json: "You've already voted!"
+    else
+      @vote = Vote.create(user_id: @user.id, arc_id: @arc.id)
+        if @vote.save
+          render json: @vote
+        end
+      end
     end
-  end
 
   private
     def vote_params

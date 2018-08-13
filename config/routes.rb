@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root to: "stories#index"
 
   resources :stories do
-    resources :arcs
+    resources :arcs do
+      resources :votes, only: [:create]
+    end
   end
   
 end

@@ -13,7 +13,7 @@
                 <%= 'Arc'.pluralize(story.arcs.count) %>
               <% end %>
             </header>
-            <%= link_to story_path(story), class: "has-text-dark" do %>
+            <%= link_to story_arcs_path(story), class: "has-text-dark" do %>
               <div class="message-body index-story">
                 <p>"
                   <%= story.snipped_body %>"

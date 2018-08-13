@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  acts_as_voter
   has_many :stories
   has_many :arcs
   # Include default devise modules. Others available are:

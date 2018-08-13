@@ -1,12 +1,13 @@
 <section class="section">
   <div class="container">
-    <div class="message is-medium">
+    <div class="message">
       <header class="message-header">
         <p class="message-header-title">
           <%= @story.title %>
         </p>
+        <%= link_to "Submit A Story Arc", new_story_arc_path(story_id: @story.id), class: "button is-outlined is-light" %>
       </header>
-      <div class="message-body index-story">
+      <div class="message-body">
         <p>"
           <%= @story.snipped_body %>"
         </p>

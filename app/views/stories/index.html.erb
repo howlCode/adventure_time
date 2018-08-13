@@ -8,7 +8,6 @@
               <p class="message-header-title">
                 <%= story.snipped_title %>               
               </p>
-              <%= link_to "Submit A Story Arc", new_story_arc_path(story_id: story.id), class: "button is-outlined is-light" %>
               <%= link_to story_arcs_path(story), class: "button is-outlined is-info" do %>
                 <%= story.arcs.count %>
                 <%= 'Arc'.pluralize(story.arcs.count) %>

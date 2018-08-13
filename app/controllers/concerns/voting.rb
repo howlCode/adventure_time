@@ -1,10 +1,10 @@
 module Voting
 
   def has_voted?(user, arc)
-    if user != arc.voters
-      false
-    else
+    if arc.voters.exists?(user.id)
       true
+    else
+      false
     end
   end
 

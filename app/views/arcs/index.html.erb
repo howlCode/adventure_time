@@ -5,35 +5,31 @@
         <p class="message-header-title">
           <%= @story.title %>
         </p>
-        <%= link_to "Submit A Story Arc", new_story_arc_path(story_id: @story.id), class: "button is-outlined is-light" %>
+        <span class="button">
+            <%= link_to "Submit A Story Arc", new_story_arc_path(story_id: @story.id) %>
+          </span>
       </header>
       <div class="message-body">
         <p>"
           <%= @story.snipped_body %>"
         </p>
         <br>
-      </div>
-      <span class="is-italic is-pulled-right">
         -- Submitted by:
         <%= @story.display_username %>
-      </span>
+      </div>    
     </div>
     <br>
-    <h1 class="has-text-centered">Vote On The Next Arc!</h1>
     <br>
     <div class="columns">
       <% @arcs.each do |arc| %>
         <div class="column">
+        <span id="has-voted" class="not-voted">You've Already Voted.</span>
           <div class="message">
             <header class="message-header">
-              <p class="message-header-title">
-              <span class="button is-info is-inverted">
-              Current votes: <%= arc.votes.count %>
+              <span>
+                <%= link_to "Vote Up!", story_arc_votes_path(arc_id: arc.id), method: :post, remote: true, class: "button is-inverted is-primary", id: "vote-button" %>
+                <span class="votes"><%= arc.votes.count %></span>
               </span>
-              <span class="button is-inverted is-primary">
-                <%= link_to "Vote!", story_arc_votes_path(arc_id: arc.id), method: :post, remote: true %>
-              </span>
-              </p>
             </header>
             <%= link_to story_arc_path(id: arc.id) do %>
               <div class="message-body index-story">
@@ -50,4 +46,5 @@
     </div>
     <%= link_to "Top", '#logo', class: "button is-outlined is-dark" %>
   </div>
+
 </section>

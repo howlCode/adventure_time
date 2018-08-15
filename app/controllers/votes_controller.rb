@@ -8,9 +8,9 @@ class VotesController < ApplicationController
 
     if !has_voted?(@user, @arc)
       @vote = Vote.create(user_id: @user.id, arc_id: @arc.id)
-      render json: @vote
+      render js: "upVote();"
     else
-      render js: "alert('You already voted!');"
+      render js: "alreadyVoted();"
     end
   end
 

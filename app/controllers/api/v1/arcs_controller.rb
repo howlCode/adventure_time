@@ -1,7 +1,7 @@
 module Api
   module V1
     class ArcsController < ApplicationController
-      # before_action :authenticate_user!
+      before_action :authenticate_user, except: [:index, :all]
       before_action :load_story
       before_action :set_arc, except: [:create, :index]
 
@@ -17,9 +17,12 @@ module Api
       def create
         @arc = current_user.arcs.build(arc_params)
         if @arc.save
-          render json: "Story-arc successfully saved", status: 200
+          render status: 200, 
+                 json: {
+                   message: "Story-arc successfully saved"
+                 }.to_json
         else
-          render json: status: 422
+          render status: 422
         end
       end
 

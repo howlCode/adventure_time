@@ -2,7 +2,7 @@ module Api
   module V1
     class VotesController < ApplicationController
       include Voting
-      # before_action :authenticate_user!
+      before_action :authenticate_user
 
       def create
         @user = current_user
@@ -10,9 +10,15 @@ module Api
 
         if !has_voted?(@user, @arc)
           @vote = Vote.create(user_id: @user.id, arc_id: @arc.id)
-          render json: "Vote has been noted", status: 200
+          render status: 200, 
+                 json: {
+                    message: "Vote has been noted"
+                 }.to_json
         else
-          render json: "User has already voted", status: 422
+          render status: 422, 
+                 json: {
+                    message: "User has already voted"
+                 }.to_json
         end
       end
 

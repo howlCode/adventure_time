@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Arc, type: :model do
   
-  let(:user) {User.create!(email: 'test@example.com', password: 'testing123')}
+  let(:user) {User.create!(nickname: 'testing', email: 'test@example.com', password: 'testing123')}
   let(:story) {Story.create!(title: 'testing', body: 'stuff', user: user)}
 
   it "is valid with valid attributes" do

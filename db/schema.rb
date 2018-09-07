@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2018_09_06_172601) do
 
   create_table "arcs", force: :cascade do |t|
     t.integer "story_id"
-    t.text "body"
+    t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
@@ -30,9 +30,9 @@ ActiveRecord::Schema.define(version: 2018_09_06_172601) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "nickname"
-    t.string "email"
-    t.string "password_digest"
+    t.string "nickname", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Story, type: :model do
 
-  let(:user) {User.create!(email: 'test@example.com', password: 'testing123')}
+  let(:user) {User.create!(nickname: 'testing', email: 'test@example.com', password: 'testing123')}
 
   it "is valid with valid attributes" do
     story = Story.create!(title: "test title", body: "test body", user: user)

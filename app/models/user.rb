@@ -5,11 +5,4 @@ class User < ApplicationRecord
   has_many :stories
   has_many :arcs
   has_many :votes
-
-  def to_token_payload
-    {
-        sub: id,
-        nickname: nickname
-    }
-  end
 end

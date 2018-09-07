@@ -2,7 +2,7 @@ module Api
   module V1
     class VotesController < ApplicationController
       include Voting
-      before_action :authenticate_user
+      before_action :authorize_access_request!
 
       def create
         @user = current_user
@@ -10,15 +10,9 @@ module Api
 
         if !has_voted?(@user, @arc)
           @vote = Vote.create(user_id: @user.id, arc_id: @arc.id)
-          render status: 200, 
-                 json: {
-                    message: "Vote has been noted"
-                 }.to_json
+          render json: status: :created
         else
-          render status: 422, 
-                 json: {
-                    message: "User has already voted"
-                 }.to_json
+          render json: "User has already voted", status: :unprocessable_entity
         end
       end
 

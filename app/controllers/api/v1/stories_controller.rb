@@ -1,7 +1,7 @@
 module Api
   module V1
     class StoriesController < ApplicationController
-      before_action :authenticate_user, except: [:index, :show]
+      before_action :authorize_access_request!, except: [:index, :show]
       before_action :set_story, except: [:index, :create]
 
       def index
@@ -17,11 +17,22 @@ module Api
         @story = current_user.stories.build(story_params)
 
         if @story.save
-          render status: 200,
-                 json: { message: "Story successfully created" }.to_json
+          render json: @story, status: :created, location: api_v1_story_path(@story)
         else
-          render status: 422
+          render json: @story.errors, status: :unprocessable_entity
         end
+      end
+
+      def update
+        if @story.update(story_params)
+          render json: @story
+        else
+          render json: @story.errors, status: :unprocessable_entity
+        end
+      end
+
+      def destroy
+        @story.destroy
       end
 
       private 

@@ -1,7 +1,7 @@
 module Api
   module V1
     class ArcsController < ApplicationController
-      before_action :authenticate_user, except: [:index, :all]
+      before_action :authorize_access_request!, except: [:index, :all]
       before_action :load_story
       before_action :set_arc, except: [:create, :index]
 
@@ -16,13 +16,19 @@ module Api
 
       def create
         @arc = current_user.arcs.build(arc_params)
+
         if @arc.save
-          render status: 200, 
-                 json: {
-                   message: "Story-arc successfully saved"
-                 }.to_json
+          render render json: @arc, status: :created, location: api_v1_arc_path(@arc)
         else
-          render status: 422
+          render json: @arc.errors, status: :unprocessable_entity
+        end
+      end
+
+      def update
+        if @arc.update(arc_params)
+          render json: @arc
+        else
+          render json: @arc.errors, status: :unprocessable_entity
         end
       end
 

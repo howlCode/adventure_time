@@ -1,6 +1,8 @@
 module Api
   module V1
     class SignupController < ApplicationController
+      before_action :authorize_access_request!, only: [:destroy]
+
       def create
         user = User.new(user_params)
         if user.save
@@ -16,6 +18,12 @@ module Api
         else
           render json: { error: user.errors.full_messages.join(' ') }, status: :unprocessable_entity
         end
+      end
+
+      def destroy
+        session = JWTSessions::Session.new(payload: payload)
+        session.flush_by_access_payload
+        render json: :ok
       end
 
       private

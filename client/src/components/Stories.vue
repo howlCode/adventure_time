@@ -9,7 +9,7 @@
                 <p class="has-text-danger">
                   Arcs:
                   <span class="has-text-light">
-                    1
+                    {{ story.arcs.length }}
                   </span>
                 </p>
               </header>

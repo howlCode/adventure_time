@@ -14,6 +14,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require_relative 'support/response_helper'
+require_relative 'support/auth_helper'
 require 'database_cleaner'
 
 RSpec.configure do |config|
@@ -30,6 +31,7 @@ RSpec.configure do |config|
     #     # => "be bigger than 2"
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
+  config.include AuthHelper
   config.include ResponseHelper
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

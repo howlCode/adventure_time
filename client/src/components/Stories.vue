@@ -1,8 +1,8 @@
 <template>
     <section class="section">
       <div class="container">
-        <div class="columns">
-          <div class="column" v-for="story in stories" :key="story.id">
+        <div class="columns is-multiline">
+          <div class="column is-half" v-for="story in stories" :key="story.id">
             <div class="message is-medium main-story">
               <header class="message-header">
                 <p class="message-header-title">{{ story.title }}</p>
@@ -16,7 +16,7 @@
               <div class="message-body">
                 <p>{{ textTruncate(story.body, 200) }}</p>
                 <span class="is-italic is-pulled-right">
-                -- {{ story.user_id }}
+                Submitted by: {{ story.user.nickname }}
                 </span>
               </div>
             </div>
@@ -35,16 +35,12 @@ export default {
     };
   },
   created() {
-    if (!localStorage.signedIn) {
-      this.$router.replace("/");
-    } else {
-      this.$http.secured
-        .get("/stories")
-        .then(response => {
-          this.stories = response.data;
-        })
-        .catch(error => this.setError(error, "Something went wrong"));
-    }
+    this.$http.plain
+      .get("/stories")
+      .then(response => {
+        this.stories = response.data;
+      })
+      .catch(error => this.setError(error, "Something went wrong"));
   },
   methods: {
     setError(error, text) {

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import App from "./App";
 import router from "./router";
+import { store } from "./store";
 import VueAxios from "vue-axios";
 import { securedAxiosInstance, plainAxiosInstance } from "./backend/axios";
 require("./assets/sass/main.scss");
@@ -15,6 +16,7 @@ Vue.use(VueAxios, {
 new Vue({
   el: "#app",
   router,
+  store,
   securedAxiosInstance,
   plainAxiosInstance,
   components: { App },

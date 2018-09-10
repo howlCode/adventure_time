@@ -3,5 +3,5 @@ class Story < ApplicationRecord
   belongs_to :user
   has_many :arcs
   validates :title, :body, presence: true
-
+  validates_uniqueness_of :title 
 end

@@ -1,6 +1,4 @@
 <template>
-  <div class="has-text-centered">
-    <h1 id="logo">Adventure Time</h1>
   <form class="form-signup" @submit.prevent="signup">
     <div class="help is-danger" v-if="error">{{ error }}</div>
     <div class="field">
@@ -29,10 +27,9 @@
     </div>
     <button type="submit" class="button is-primary">Sign up</button>
     <div>
-      <router-link to="/">Sign in</router-link>
+      <router-link to="/signin">Sign in</router-link>
     </div>
   </form>
-  </div>
 </template>
 
 <script>
@@ -73,7 +70,7 @@ export default {
       localStorage.csrf = response.data.csrf;
       localStorage.signedIn = true;
       this.error = "";
-      this.$router.replace("/stories");
+      this.$router.replace("/");
     },
     signupFailed(error) {
       this.error =
@@ -84,7 +81,7 @@ export default {
     },
     checkSignedIn() {
       if (localStorage.signedIn) {
-        this.$router.replace("/stories");
+        this.$router.replace("/");
       }
     }
   }

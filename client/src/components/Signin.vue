@@ -1,7 +1,4 @@
 <template>
-  <div class="has-text-centered">
-    <h1 id="logo">Adventure Time</h1>
-
   <form class="form-signin" @submit.prevent="signin">
     <div class="help is-danger" v-if="error">{{ error }}</div>
     <div class="field">
@@ -21,7 +18,6 @@
       <router-link to="/signup">Sign up</router-link>
     </div>
   </form>
-    </div>
 </template>
 
 <script>
@@ -53,21 +49,27 @@ export default {
         this.signinFailed(response);
         return;
       }
-      localStorage.csrf = response.data.csrf;
-      localStorage.signedIn = true;
-      this.error = "";
-      this.$router.replace("/stories");
+      this.$http.plain
+        .get("/me")
+        .then(meResponse => {
+          this.$store.commit("setCurrentUser", {
+            currentUser: meResponse.data,
+            csrf: response.data.csrf
+          });
+          this.error = "";
+          this.$router.replace("/");
+        })
+        .catch(error => this.signinFailed(error));
     },
     signinFailed(error) {
       this.error =
         (error.response && error.response.data && error.response.data.error) ||
         "";
-      delete localStorage.csrf;
-      delete localStorage.signedIn;
+      this.$store.commit("unsetCurrentUser");
     },
     checkSignedIn() {
-      if (localStorage.signedIn) {
-        this.$router.replace("/stories");
+      if (this.$store.state.signedIn) {
+        this.$router.replace("/");
       }
     }
   }

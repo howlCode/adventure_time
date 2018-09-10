@@ -9,18 +9,24 @@
   text-decoration: none;
 }
 
-.message-header-title {
-  text-transform: capitalize;
+.logo-link {
+  text-decoration: none;
+  color: #fff;
+
+  &:hover {
+    color: #fff;
+  }
 }
 
-.story-selection:hover {
-  cursor: pointer;
+.message-header-title {
+  text-transform: capitalize;
 }
 
 .main-story {
   @include swell;
 
   &:hover {
+    cursor: pointer;
     @include hoverSwell();
   }
 }

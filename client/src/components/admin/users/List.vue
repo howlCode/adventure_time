@@ -17,7 +17,7 @@
           <th>{{ user.id }}</th>
           <td>{{ user.email }}</td>
           <td>{{ user.role }}</td>
-          <router-link :to="`/admin/users/${user.id}/todos`">
+          <router-link :to="`/admin/users/${user.id}/stories`">
             <i class="fa fa-list-ul"></i>
           </router-link>
         </tr>
@@ -36,10 +36,7 @@ export default {
     };
   },
   created() {
-    if (
-      this.$store.state.signedIn &&
-      (this.$store.getters.isAdmin || this.$store.getters.isManager)
-    ) {
+    if (this.$store.state.signedIn && this.$store.getters.isAdmin) {
       this.$http.secured
         .get("/admin/users")
         .then(response => {

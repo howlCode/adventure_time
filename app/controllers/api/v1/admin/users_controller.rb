@@ -2,7 +2,7 @@ module Api
   module V1
     class Admin::UsersController < ApplicationController
       before_action :authorize_access_request!
-      ROLES = %w[admin manager].freeze
+      ROLES = %w[admin].freeze
 
 
       def index

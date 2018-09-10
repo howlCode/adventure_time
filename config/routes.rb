@@ -8,8 +8,9 @@ Rails.application.routes.draw do
       delete 'signin', controller: :signin, action: :destroy
       get 'me', controller: :users, action: :me
       namespace :admin do
-        resources :users, only: [:index]
-        resources :stories, only: [:index]
+        resources :users, only: [:index] do
+          resources :stories, only: [:index]
+        end
       end
       resources :stories do
         resources :arcs do

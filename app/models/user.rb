@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :arcs
   has_many :votes
   
-  enum role: %i[user manager admin].freeze
+  enum role: %i[user admin].freeze
 
   validates :email,
             format: { with: URI::MailTo::EMAIL_REGEXP },

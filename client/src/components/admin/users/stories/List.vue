@@ -6,16 +6,16 @@
     <table class="table">
       <thead>
         <tr>
-          <th>ID</th>
           <th>User ID</th>
           <th>Title</th>
+          <th>Manage</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="story in stories" :key="story.id" :story="story">
-          <th>{{ story.id }}</th>
           <th>{{ story.user_id }}</th>
           <td>{{ story.title }}</td>
+          <td><button @click="deleteStory(story)" class="button is-danger is-small">Delete</button></td>
         </tr>
       </tbody>
     </table>
@@ -50,6 +50,16 @@ export default {
       this.error =
         (error.response && error.response.data && error.response.data.error) ||
         text;
+    },
+    deleteStory(story) {
+      this.$http.secured
+        .delete(`/stories/${story.id}`)
+        .then(response => {
+          this.error = response.data;
+        })
+        .catch(error => {
+          this.setError(error, "Something went wrong");
+        });
     }
   }
 };

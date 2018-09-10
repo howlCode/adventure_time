@@ -2,19 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::Admin::UsersController, type: :controller do
   let!(:user) { create(:user) }
-  let!(:manager) { create(:user, role: :manager) }
   let!(:admin) { create(:user, role: :admin) }
 
   describe 'GET #index' do
     it 'allows admin to receive users list' do
       sign_in_as(admin)
-      get :index
-      expect(response).to be_successful
-      expect(response_json.size).to eq 3
-    end
-
-    it 'allows manager to receive users list' do
-      sign_in_as(manager)
       get :index
       expect(response).to be_successful
       expect(response_json.size).to eq 3

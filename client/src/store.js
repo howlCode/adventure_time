@@ -14,7 +14,7 @@ export const store = new Vuex.Store({
       return state.currentUser && state.currentUser.role === "admin";
     },
     isUser(state) {
-      return state.currentUser && state.currentUser.role === "user";
+      return state.signedIn;
     }
   },
   mutations: {

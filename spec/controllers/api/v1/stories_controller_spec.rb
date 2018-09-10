@@ -10,7 +10,7 @@ RSpec.describe Api::V1::StoriesController, type: :controller do
   let(:invalid_attributes) {
     { title: nil, body: nil }
   }
-
+  
   before do
     payload = { user_id: user.id }
     session = JWTSessions::Session.new(payload: payload)

@@ -48,7 +48,7 @@ RSpec.describe Api::V1::ArcsController, type: :controller do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
         request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
         expect {
-          post :create, params: { arc: valid_attributes, story: story, user: user }
+          post :create, params: { arc: valid_attributes, story_id: story.id } 
         }.to change(Arc, :count).by(1)
       end
 
@@ -123,7 +123,7 @@ RSpec.describe Api::V1::ArcsController, type: :controller do
       request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
       expect {
         delete :destroy, params: { id: arc.id }
-      }.to change(arc, :count).by(-1)
+      }.to change(Arc, :count).by(-1)
     end
   end
 end

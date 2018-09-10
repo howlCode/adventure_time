@@ -1,4 +1,7 @@
 <template>
+  <div class="has-text-centered">
+    <h1 id="logo">Adventure Time</h1>
+
   <form class="form-signin" @submit.prevent="signin">
     <div class="help is-danger" v-if="error">{{ error }}</div>
     <div class="field">
@@ -18,6 +21,7 @@
       <router-link to="/signup">Sign up</router-link>
     </div>
   </form>
+    </div>
 </template>
 
 <script>

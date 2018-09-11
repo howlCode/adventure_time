@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Signin from "@/components/Signin";
 import Signup from "@/components/Signup";
 import Stories from "@/components/Stories";
+import StoryArcs from "@/components/StoryArcs";
 import StoryForm from "@/components/StoryForm";
 import UsersList from "@/components/admin/users/List";
 import EditUsers from "@/components/admin/users/EditUsers";
@@ -28,6 +29,11 @@ export default new Router({
       path: "/signup",
       name: "Signup",
       component: Signup
+    },
+    {
+      path: "/stories/:id",
+      name: "StoryArcs",
+      component: StoryArcs
     },
     {
       path: "/stories/new",

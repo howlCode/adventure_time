@@ -6,11 +6,11 @@ module Api
 
       def index
         @stories = Story.all
-        render json: @stories.as_json(include: [:arcs, :user] )
+        render json: @stories.as_json(include: [:arcs, :user])
       end
 
       def show
-        render json: @story.as_json(include: :arcs)
+        render json: @story.as_json(include: [:user, arcs: { include: :user }])
       end
 
       def create

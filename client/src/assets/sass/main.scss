@@ -40,11 +40,24 @@
   overflow: hidden;
 }
 
+.arc-text {
+  color: hsl(96, 23%, 50%);
+}
+
 .arc-titles-text a {
   color: #fff;
   font-size: 1rem;
 
   &:hover {
     color: #ec4c64;
+  }
+}
+
+.unvoted-arcs {
+  @include swell;
+
+  &:hover {
+    cursor: pointer;
+    @include hoverSwell();
   }
 }

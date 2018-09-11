@@ -14,7 +14,7 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false }
 
   def attributes
-    { id: id, email: email, role: role }
+    { id: id, nickname: nickname, email: email, role: role }
   end
 
   def generate_password_token!

@@ -7,7 +7,7 @@ module Api
 
       def index
         @arcs = @story.arcs.all
-        render json: @arcs
+        render json: @arcs.as_json(include: [:user])
       end
 
       def show

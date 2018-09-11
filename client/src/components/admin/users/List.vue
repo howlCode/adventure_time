@@ -15,7 +15,14 @@
       <tbody>
         <tr v-for="user in users" :key="user.id" :user="user">
           <th>{{ user.id }}</th>
-          <td>{{ user.email }}</td>
+          <td td v-if="showUsersLink(user)">
+            <router-link :to="`/admin/users/${user.id}`">
+              {{ user.email }}
+            </router-link>
+          </td>
+          <td td v-else>
+            {{ user.email }}
+          </td>
           <td>{{ user.role }}</td>
           <router-link :to="`/admin/users/${user.id}/stories`">
             <i class="fa fa-list-ul"></i>
@@ -57,6 +64,12 @@ export default {
     },
     showStoriesLink() {
       return this.$store.getters.isAdmin;
+    },
+    showUsersLink(user) {
+      return (
+        this.$store.getters.isAdmin &&
+        this.$store.getters.currentUserId !== user.id
+      );
     }
   }
 };

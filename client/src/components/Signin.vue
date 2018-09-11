@@ -16,6 +16,8 @@
     <button type="submit" class="button is-primary">Sign in</button>
     <div>
       <router-link to="/signup">Sign up</router-link>
+      <br />
+      <router-link to="/forgot_password">Forgot Password</router-link>
     </div>
   </form>
 </template>

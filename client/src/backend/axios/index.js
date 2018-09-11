@@ -40,10 +40,18 @@ securedAxiosInstance.interceptors.response.use(null, error => {
     return plainAxiosInstance
       .post("/refresh", {}, { headers: { "X-CSRF-TOKEN": store.state.csrf } })
       .then(response => {
-        store.commit("refresh", response.data.csrf);
+        // request new users info
+        plainAxiosInstance
+          .get("/me")
+          .then(meResponse =>
+            store.commit("setCurrentUser", {
+              currentUser: meResponse.data,
+              csrf: response.data.csrf
+            })
+          );
         // And after successful refresh - repeat the original request
         let retryConfig = error.response.config;
-        retryConfig.headers["X-CSRF-TOKEN"] = store.state.csrf;
+        retryConfig.headers["X-CSRF-TOKEN"] = response.data.csrf;
         return plainAxiosInstance.request(retryConfig);
       })
       .catch(error => {

@@ -3,27 +3,26 @@
     <div class="nav-pages">
       <div class="has-text-left">
         <router-link class="button is-dark" to="/">See All Stories</router-link>
-        <router-link class="button is-danger" to="/arcs/need-votes">Vote on New Story-Arcs!</router-link>
         <span class="spacer"></span>
         <router-link class="button is-info is-pulled-right" to="/new-story">Create a New Story</router-link>
       </div>
     </div>
       <div class="columns is-multiline">
-        <div class="column is-full" v-for="story in stories" :key="story.id">     
-          <div class="message main-story" @click="showStory(story)">
+        <div class="column is-full" v-for="arc in arcs" :key="arc.id">     
+          <div class="message main-story" @click="showArc(arc)">
             <header class="message-header">
-              <p class="message-header-title">{{ story.title }}</p>
+              <p class="message-header-title">See the full story!</p>
               <p class="has-text-light">
                 Votes:
                 <span class="has-text-danger">
-                 {{ story.arcs.length }}
+                 2 (to be arcs.votes.length)
                 </span>
               </p>
             </header>
             <div class="message-body">
-              <p>{{ textTruncate(story.body, 175) }}</p>
+              <p>{{ textTruncate(arc.body, 175) }}</p>
               <span class="is-italic has-text-primary">
-                Written by: {{ story.user.nickname }}
+                Written by: {{ arc.user.nickname }}
               </span>
               <span class="is-pulled-right">
                 <span class="vote-text">Vote:</span> <span class="button is-small is-primary">UP</span> <span class="button is-small is-warning">DOWN</span>
@@ -37,17 +36,17 @@
 
 <script>
 export default {
-  name: "Stories",
+  name: "VotingMain",
   data() {
     return {
-      stories: []
+      arcs: []
     };
   },
   created() {
     this.$http.plain
-      .get("/stories")
+      .get("/arcs")
       .then(response => {
-        this.stories = response.data;
+        this.arcs = response.data;
       })
       .catch(error => this.setError(error, "Something went wrong"));
   },
@@ -62,8 +61,8 @@ export default {
       end = end || "...";
       return str.substr(0, len - end.length) + end;
     },
-    showStory(story) {
-      const storyId = story.id;
+    showArc(arc) {
+      const arcId = arc.id;
       this.$router.push({ path: `/stories/${storyId}` });
     },
     newArc() {

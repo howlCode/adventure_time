@@ -1,9 +1,14 @@
 module Api
   module V1
     class ArcsController < ApplicationController
-      before_action :authorize_access_request!, except: [:index, :show]
-      before_action :load_story
-      before_action :set_arc, except: [:create, :index]
+      before_action :authorize_access_request!, except: [:all_arcs, :index, :show]
+      before_action :load_story, except: [:all_arcs]
+      before_action :set_arc, except: [:all_arcs, :create, :index]
+
+      def all_arcs
+        @arcs = Arc.all
+        render json: @arcs.as_json(include: [:story, :user])
+      end
 
       def index
         @arcs = @story.arcs.all

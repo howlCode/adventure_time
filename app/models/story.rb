@@ -3,5 +3,5 @@ class Story < ApplicationRecord
   belongs_to :user
   has_many :arcs, dependent: :destroy
   validates :title, :body, presence: true
-  validates_uniqueness_of :title 
+  validates :title , uniqueness: true
 end

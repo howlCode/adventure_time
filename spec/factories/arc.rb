@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :arc do
-    body { "Once upon a testing continued..." }
+    body { Faker::Lovecraft.sentence }
     story
     user
   end

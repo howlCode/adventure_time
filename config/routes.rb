@@ -9,10 +9,11 @@ Rails.application.routes.draw do
       get 'me', controller: :users, action: :me
       
       namespace :admin do
-        resources :users, only: [:index] do
-          resources :stories, only: [:index]
+        resources :users, only: [:index, :show, :update] do
+          resources :stories, only: [:index], controller: 'users/stories'
         end
       end
+      
       resources :stories do
         resources :arcs do
           resources :votes, only: [:create]

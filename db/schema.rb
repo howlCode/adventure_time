@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2018_09_10_204041) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "role", default: "user"
+    t.integer "role", default: 0
     t.string "reset_password_token"
     t.datetime "reset_password_token_expires_at"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"

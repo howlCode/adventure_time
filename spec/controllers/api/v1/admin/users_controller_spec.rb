@@ -9,7 +9,7 @@ RSpec.describe Api::V1::Admin::UsersController, type: :controller do
       sign_in_as(admin)
       get :index
       expect(response).to be_successful
-      expect(response_json.size).to eq 3
+      expect(response_json.size).to eq 2
     end
 
     it 'does not allow regular user to receive users list' do
@@ -36,20 +36,20 @@ RSpec.describe Api::V1::Admin::UsersController, type: :controller do
   describe 'PATCH #update' do
     it 'allows admin to update a user' do
       sign_in_as(admin)
-      patch :update, params: { id: user.id, user: { role: :manager } }
+      patch :update, params: { id: user.id, user: { role: :admin } }
       expect(response).to be_successful
-      expect(user.reload.role).to eq 'manager'
+      expect(user.reload.role).to eq 'admin'
     end
 
     it 'does not allow user to update a user' do
       sign_in_as(user)
-      patch :update, params: { id: user.id, user: { role: :manager } }
+      patch :update, params: { id: user.id, user: { role: :admin } }
       expect(response).to have_http_status(403)
     end
 
     it 'does not allow admin to update their own role' do
       sign_in_as(admin)
-      patch :update, params: { id: admin.id, user: { role: :manager } }
+      patch :update, params: { id: admin.id, user: { role: :user } }
       expect(response).to have_http_status(400)
     end
   end

@@ -3,19 +3,13 @@
     <div class="container">
       <div class="columns is-multiline">
         <div class="column is-half" v-for="story in stories" :key="story.id">
-          <div class="message is-medium main-story" @click="showStory(story)">
+          <div class="message main-story" @click="showStory(story)">
             <header class="message-header">
               <p class="message-header-title">{{ story.title }}</p>
               <p class="has-text-danger">
-                Arcs Needing Votes:
+                Vote
                 <span class="has-text-light">
-                  {{ story.arcs.length }}
-                </span>
-              </p>
-              <p class="has-text-danger">
-                Arcs:
-                <span class="has-text-light">
-                  {{ story.arcs.length }}
+                 {{ story.arcs.length }}
                 </span>
               </p>
             </header>

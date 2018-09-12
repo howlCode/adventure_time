@@ -41,14 +41,12 @@ securedAxiosInstance.interceptors.response.use(null, error => {
       .post("/refresh", {}, { headers: { "X-CSRF-TOKEN": store.state.csrf } })
       .then(response => {
         // request new users info
-        plainAxiosInstance
-          .get("/me")
-          .then(meResponse =>
-            store.commit("setCurrentUser", {
-              currentUser: meResponse.data,
-              csrf: response.data.csrf
-            })
-          );
+        plainAxiosInstance.get("/me").then(meResponse =>
+          store.commit("setCurrentUser", {
+            currentUser: meResponse.data,
+            csrf: response.data.csrf
+          })
+        );
         // And after successful refresh - repeat the original request
         let retryConfig = error.response.config;
         retryConfig.headers["X-CSRF-TOKEN"] = response.data.csrf;
@@ -57,7 +55,7 @@ securedAxiosInstance.interceptors.response.use(null, error => {
       .catch(error => {
         store.commit("unsetCurrentUser");
         // redirect to signin in case refresh request fails
-        location.replace("/");
+        location.replace("/signin");
         return Promise.reject(error);
       });
   } else {

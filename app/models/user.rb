@@ -5,8 +5,6 @@ class User < ApplicationRecord
   has_many :stories
   has_many :arcs
   has_many :votes
-  
-  enum role: %i[user admin].freeze
 
   validates :email,
             format: { with: URI::MailTo::EMAIL_REGEXP },
@@ -14,7 +12,7 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false }
 
   def attributes
-    { id: id, nickname: nickname, email: email, role: role }
+    { id: id, nickname: nickname, email: email}
   end
 
   def generate_password_token!

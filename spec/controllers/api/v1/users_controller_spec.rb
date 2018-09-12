@@ -10,7 +10,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     it 'returns a success response' do
       get :me
       expect(response).to be_successful
-      expect(response_json).to eq user.as_json(only: [:id, :email, :role])
+      expect(response_json).to eq user.as_json(only: [:id, :nickname, :email])
     end
   end
 end

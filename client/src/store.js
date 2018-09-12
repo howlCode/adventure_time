@@ -10,10 +10,7 @@ export const store = new Vuex.Store({
     csrf: null
   },
   getters: {
-    isAdmin(state) {
-      return state.currentUser && state.currentUser.role === "admin";
-    },
-    isUser(state) {
+    isSignedIn(state) {
       return state.signedIn;
     },
     currentUserId(state) {

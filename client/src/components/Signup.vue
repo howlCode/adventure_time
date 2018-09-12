@@ -67,12 +67,17 @@ export default {
         this.signupFailed(response);
         return;
       }
-      this.$store.commit("setCurrentUser", {
-        currentUser: meResponse.data,
-        csrf: response.data.csrf
-      });
-      this.error = "";
-      this.$router.replace("/");
+      this.$http.plain
+        .get("/me")
+        .then(meResponse => {
+          this.$store.commit("setCurrentUser", {
+            currentUser: meResponse.data,
+            csrf: response.data.csrf
+          });
+          this.error = "";
+          this.$router.replace("/");
+        })
+        .catch(error => this.signupFailed(error));
     },
     signupFailed(error) {
       this.error =
@@ -81,7 +86,7 @@ export default {
       this.$store.commit("unsetCurrentUser");
     },
     checkSignedIn() {
-      if (this.$store.state.signedIn) {
+      if (this.$store.state.isSignedIn) {
         this.$router.replace("/");
       }
     }

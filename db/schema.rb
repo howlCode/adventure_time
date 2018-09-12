@@ -15,18 +15,20 @@ ActiveRecord::Schema.define(version: 2018_09_10_204041) do
   create_table "arcs", force: :cascade do |t|
     t.integer "story_id"
     t.text "body", null: false
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
     t.index ["story_id"], name: "index_arcs_on_story_id"
+    t.index ["user_id"], name: "index_arcs_on_user_id"
   end
 
   create_table "stories", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.index ["user_id"], name: "index_stories_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -35,7 +37,6 @@ ActiveRecord::Schema.define(version: 2018_09_10_204041) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "role", default: 0
     t.string "reset_password_token"
     t.datetime "reset_password_token_expires_at"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"

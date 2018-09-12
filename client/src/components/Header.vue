@@ -17,10 +17,9 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="sign-out is-pulled-right">
-            <router-link class="button is-info" v-if="showAdminLink()" to="/admin/users">Admin</router-link>
-            <router-link v-if="signedIn()" class="button is-info" to="/stories/new">Create a New Story</router-link>
-            <button v-if="signedIn()" class="button is-light" @click="signOut()">Sign out</button>
-            <router-link v-if="!signedIn()" class="button is-primary" to="/signin">Sign in</router-link>
+            <router-link v-if="isSignedIn()" class="button is-info" to="/new-story">Create a New Story</router-link>
+            <button v-if="isSignedIn()" class="button is-light" @click="signOut()">Sign out</button>
+            <router-link v-if="!isSignedIn()" class="button is-primary" to="/signin">Sign in</router-link>
           </div>
         </div>
       </div>
@@ -47,11 +46,8 @@ export default {
         })
         .catch(error => this.setError(error, "Cannot sign out"));
     },
-    signedIn() {
-      return this.$store.getters.isUser;
-    },
-    showAdminLink() {
-      return this.$store.getters.isAdmin;
+    isSignedIn() {
+      return this.$store.getters.isSignedIn;
     },
     setError(error, text) {
       this.error =

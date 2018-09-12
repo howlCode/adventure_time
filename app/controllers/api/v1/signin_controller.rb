@@ -6,7 +6,7 @@ module Api
       def create
         user = User.find_by!(email: params[:email])
         if user.authenticate(params[:password])
-          payload  = { user_id: user.id, aud: [user.role] }
+          payload  = { user_id: user.id }
           session = JWTSessions::Session.new(payload: payload,
                                              refresh_by_access_allowed: true,
                                              namespace: "user_#{user.id}")
@@ -27,6 +27,12 @@ module Api
         session.flush_by_access_payload
         render json: :ok
       end
+
+      private
+
+        def not_found
+          render json: { error: 'Cannont find such email/password combination' }, status: :not_found
+        end
 
     end
   end

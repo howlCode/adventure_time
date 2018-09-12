@@ -2,9 +2,12 @@ import Vue from "vue";
 import Router from "vue-router";
 import Signin from "@/components/Signin";
 import Signup from "@/components/Signup";
+
 import Stories from "@/components/Stories";
 import StoryArcs from "@/components/StoryArcs";
 import StoryForm from "@/components/StoryForm";
+import ArcForm from "@/components/ArcForm";
+
 import ForgotPassword from "@/components/ForgotPassword";
 import ResetPassword from "@/components/ResetPassword";
 
@@ -36,6 +39,11 @@ export default new Router({
       path: "/new-story",
       name: "StoryForm",
       component: StoryForm
+    },
+    {
+      path: "/story/:id/new-arc",
+      name: "ArcForm",
+      component: ArcForm
     },
     {
       path: "/forgot_password",

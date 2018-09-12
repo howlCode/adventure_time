@@ -5,11 +5,11 @@ RSpec.describe Api::V1::ArcsController, type: :controller do
   let(:story) { create(:story) }
 
   let(:valid_attributes) {
-    { body: 'new body' }
+    { body: 'new body', story_id: story.id }
   }
 
   let(:invalid_attributes) {
-    { body: nil }
+    { body: nil, story_id: nil }
   }
 
   before do
@@ -55,15 +55,15 @@ RSpec.describe Api::V1::ArcsController, type: :controller do
       it 'renders a JSON response with the new arc' do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
         request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
-        post :create, params: { arc: valid_attributes }
+        post :create, params: { arc: valid_attributes, story_id: story.id }
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/json')
-        expect(response.location).to eq(api_v1_arc_path(Arc.last))
+        expect(response.location).to eq(api_v1_story_arc_path(id: Arc.last.id))
       end
 
       it 'unauth without CSRF' do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
-        post :create, params: { arc: valid_attributes }
+        post :create, params: { arc: valid_attributes, story_id: story.id }
         expect(response).to have_http_status(401)
       end
     end
@@ -72,7 +72,7 @@ RSpec.describe Api::V1::ArcsController, type: :controller do
       it 'renders a JSON response with errors for the new arc' do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
         request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
-        post :create, params: { arc: invalid_attributes }
+        post :create, params: { arc: invalid_attributes, story_id: story.id }
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end
@@ -80,7 +80,7 @@ RSpec.describe Api::V1::ArcsController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let!(:arc) { create(:arc, user: user) }
+    let!(:arc) { create(:arc, story: story, user: user) }
 
     context 'with valid params' do
       let(:new_attributes) {
@@ -90,7 +90,7 @@ RSpec.describe Api::V1::ArcsController, type: :controller do
       it 'updates the requested arc' do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
         request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
-        put :update, params: { id: arc.id, arc: new_attributes }
+        put :update, params: { id: arc.to_param, story_id: story.id, arc: new_attributes } 
         arc.reload
         expect(arc.body).to eq new_attributes[:body]
       end
@@ -98,7 +98,7 @@ RSpec.describe Api::V1::ArcsController, type: :controller do
       it 'renders a JSON response with the arc' do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
         request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
-        put :update, params: { id: arc.to_param, arc: valid_attributes }
+        put :update, params: { id: arc.to_param, story_id: story.id, arc: valid_attributes }
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to eq('application/json')
       end
@@ -108,7 +108,7 @@ RSpec.describe Api::V1::ArcsController, type: :controller do
       it 'renders a JSON response with errors for the arc' do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
         request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
-        put :update, params: { id: arc.to_param, arc: invalid_attributes }
+        put :update, params: { id: arc.to_param, story_id: story.id, arc: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end
@@ -116,13 +116,13 @@ RSpec.describe Api::V1::ArcsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:arc) { create(:arc, user: user) }
+    let!(:arc) { create(:arc, story: story, user: user) }
 
     it 'destroys the requested arc' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
       request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
       expect {
-        delete :destroy, params: { id: arc.id }
+        delete :destroy, params: { id: arc.id, story_id: story.id }
       }.to change(Arc, :count).by(-1)
     end
   end

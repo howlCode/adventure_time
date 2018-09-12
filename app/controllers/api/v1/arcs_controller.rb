@@ -18,7 +18,7 @@ module Api
         @arc = current_user.arcs.build(arc_params)
 
         if @arc.save
-          render json: @arc, status: :created, location: api_v1_story_path(@story)
+          render json: @arc, status: :created, location: api_v1_story_arc_path(@story, @arc)
         else
           render json: @arc.errors, status: :unprocessable_entity
         end

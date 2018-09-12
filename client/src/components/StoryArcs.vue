@@ -1,6 +1,7 @@
 <template>
   <section class="section">
     <div class="container">
+      <button class="button is-primary" @click="newArc">Submit A New Arc</button>
       <div class="columns is-multiline">
         <div class="column is-half" v-for="unVotedArc in unVotedArcs" :key="unVotedArc.id">
           <div class="message is-warning unvoted-arcs">
@@ -86,6 +87,10 @@ export default {
       if (!len && !end) return str;
       end = end || "...";
       return str.substr(0, len - end.length) + end;
+    },
+    newArc() {
+      const storyId = this.story.id;
+      this.$router.push({ path: `/story/${storyId}/new-arc` });
     }
   }
 };

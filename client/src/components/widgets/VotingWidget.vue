@@ -1,10 +1,10 @@
 <template>
   <div class="is-pulled-right">
-    <span v-if="errors">Error: {{ errors }}</span>
+    <span v-if="errors">Error: {{ errors }} </span>
     <span @click="voteUp(arc)" class="button is-primary"><i class="fas fa-arrow-up"></i></span>
-    <span class="vote-text has-text-primary">  {{ arc.get_upvotes.length }} </span>
+    <span class="vote-text has-text-primary">  {{ votesFor }} </span>
     <span @click="voteDown(arc)" class="button is-danger"><i class="fas fa-arrow-down"></i></span>
-    <span class="vote-text has-text-danger">  {{ arc.get_downvotes.length }} </span>
+    <span class="vote-text has-text-danger">  {{ votesAgainst }} </span>
   </div>
 </template>
 
@@ -14,8 +14,14 @@ export default {
   props: ["arc"],
   data() {
     return {
+      votesFor: "",
+      votesAgainst: "",
       errors: ""
     };
+  },
+  created() {
+    this.votesFor = this.arc.get_upvotes.length;
+    this.votesAgainst = this.arc.get_downvotes.length;
   },
   methods: {
     voteUp(arc) {
@@ -32,6 +38,8 @@ export default {
     },
     voteSuccessful(response) {
       this.errors = "";
+      this.votesFor = this.arc.get_upvotes.length;
+      this.votesAgainst = this.arc.get_downvotes.length;
     },
     voteFailed(error) {
       this.errors = error.response.data;

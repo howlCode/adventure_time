@@ -17,12 +17,12 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: "/",
+      path: "/stories",
       name: "Stories",
       component: Stories
     },
     {
-      path: "/vote",
+      path: "/",
       name: "VotingMain",
       component: VotingMain
     },

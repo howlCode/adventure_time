@@ -18,6 +18,8 @@ gem 'bcrypt'
 gem 'redis'
 gem 'jwt_sessions'
 gem 'rack-cors', require: 'rack/cors'
+
+gem 'acts_as_votable'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

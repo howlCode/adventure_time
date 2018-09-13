@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates_uniqueness_of :email, :nickname
   has_many :stories
   has_many :arcs
-  has_many :votes
+  acts_as_voter
 
   validates :email,
             format: { with: URI::MailTo::EMAIL_REGEXP },

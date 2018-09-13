@@ -2,8 +2,7 @@
   <section class="section">
     <div class="nav-pages">
       <div class="has-text-left">
-        <router-link class="button is-dark" to="/">See All Stories</router-link>
-        <router-link class="button is-danger" to="/arcs/need-votes">Vote on New Story-Arcs!</router-link>
+        <router-link class="button is-danger" to="/">Vote on New Story-Arcs!</router-link>
         <span class="spacer"></span>
         <router-link class="button is-info is-pulled-right" to="/new-story">Create a New Story</router-link>
       </div>
@@ -14,7 +13,7 @@
             <header class="message-header">
               <p class="message-header-title">{{ story.title }}</p>
               <p class="has-text-light">
-                Votes:
+                Arcs:
                 <span class="has-text-danger">
                  {{ story.arcs.length }}
                 </span>
@@ -24,9 +23,6 @@
               <p>{{ textTruncate(story.body, 175) }}</p>
               <span class="is-italic has-text-primary">
                 Written by: {{ story.user.nickname }}
-              </span>
-              <span class="is-pulled-right">
-                <span class="vote-text">Vote:</span> <span class="button is-small is-primary">UP</span> <span class="button is-small is-warning">DOWN</span>
               </span>
             </div>
           </div>
@@ -89,4 +85,3 @@ export default {
   font-size: 1.2rem;
 }
 </style>
-

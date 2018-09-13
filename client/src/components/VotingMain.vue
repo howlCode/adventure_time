@@ -2,7 +2,7 @@
   <section class="section">
     <div class="nav-pages">
       <div class="has-text-left">
-        <router-link class="button is-dark" to="/">See All Stories</router-link>
+        <router-link class="button is-dark" to="/stories">See All Stories</router-link>
         <span class="spacer"></span>
         <router-link class="button is-info is-pulled-right" to="/new-story">Create a New Story</router-link>
       </div>
@@ -88,4 +88,3 @@ export default {
   font-size: 1.2rem;
 }
 </style>
-

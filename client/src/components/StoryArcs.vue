@@ -28,12 +28,13 @@
           <p>{{ story.body }} ...</p>
         </div>
       </div>
+      <h2 class="subtitle">The story continued...</h2>
       <div class="voted-arcs" v-for="arc in story.arcs" :key="arc.id">
        <div class="message">
          <header class="message-header">
-          <span class="votes has-text-danger">100 Votes</span>
+          <span class="votes has-text-danger">votes</span>
           <span class="is-italic is-pulled-right">
-            Written by: {{ story.user.nickname }}
+            Written by: {{ arc.user.nickname }}
           </span>
         </header>
         <div class="message-body">
@@ -44,6 +45,7 @@
     </div>
   </section>
 </template>
+
 <script>
 export default {
   name: "StoryArcs",

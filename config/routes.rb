@@ -10,7 +10,10 @@ Rails.application.routes.draw do
       
       resources :stories do
         resources :arcs do
-          resources :votes, only: [:create]
+          member do
+            put "vote_up", to: "arcs#upvote"
+            put "vote_down", to: "arcs#downvote"
+          end
         end
       end
 

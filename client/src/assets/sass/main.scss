@@ -12,7 +12,6 @@
 .logo-link {
   text-decoration: none;
   color: #fff;
-  text-align: center;
 
   &:hover {
     color: #fff;
@@ -61,4 +60,8 @@
     cursor: pointer;
     @include hoverSwell();
   }
+}
+
+.clickable:hover {
+  cursor: pointer;
 }

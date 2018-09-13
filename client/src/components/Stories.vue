@@ -1,12 +1,5 @@
 <template>
   <section class="section">
-    <div class="nav-pages">
-      <div class="has-text-left">
-        <router-link class="button is-danger" to="/">Vote on New Story-Arcs!</router-link>
-        <span class="spacer"></span>
-        <router-link class="button is-info is-pulled-right" to="/new-story">Create a New Story</router-link>
-      </div>
-    </div>
       <div class="columns is-multiline">
         <div class="column is-full" v-for="story in stories" :key="story.id">     
           <div class="message main-story" @click="showStory(story)">
@@ -14,9 +7,10 @@
               <p class="message-header-title">{{ story.title }}</p>
               <p class="has-text-light">
                 Arcs:
-                <span class="has-text-danger">
+                <span class="has-text-success">
                  {{ story.arcs.length }}
                 </span>
+                
               </p>
             </header>
             <div class="message-body">
@@ -74,13 +68,6 @@ export default {
 </script>
 
 <style lang="css">
-.nav-pages {
-  margin-bottom: 15px;
-}
-.spacer {
-  margin: 50px;
-}
-
 .vote-text {
   font-size: 1.2rem;
 }

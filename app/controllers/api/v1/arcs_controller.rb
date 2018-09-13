@@ -7,16 +7,16 @@ module Api
 
       def all_arcs
         @arcs = Arc.all
-        render json: @arcs.as_json(include: [:story, :user])
+        render json: @arcs.as_json(include: [:story, :user, :votes_for, :get_upvotes, :get_downvotes])
       end
 
       def index
         @arcs = @story.arcs.all
-        render json: @arcs.as_json(include: [:user])
+        render json: @arcs.as_json(include: [:user, :votes_for, :get_upvotes, :get_downvotes])
       end
 
       def show
-        render json: @arc
+        render json: @arc.as_json(include: [:story, :user, :votes_for, :get_upvotes, :get_downvotes])
       end
 
       def create
@@ -41,7 +41,20 @@ module Api
         @arc.destroy
       end
 
+      def upvote
+        @arc = Arc.find(params[:id])
+        @arc.upvote_by current_user
+        render json: "Vote captured!"
+      end
+
+      def downvote
+        @arc = Arc.find(params[:id])
+        @arc.downvote_by current_user
+        render json: "Vote captured!"
+      end 
+
       private
+
         def set_arc
           @arc = @story.arcs.find(params[:id])
         end

@@ -7,6 +7,7 @@ import VotingMain from "@/components/VotingMain";
 import Stories from "@/components/Stories";
 import StoryArcs from "@/components/StoryArcs";
 import StoryForm from "@/components/StoryForm";
+import Arc from "@/components/Arc";
 import ArcForm from "@/components/ArcForm";
 
 import ForgotPassword from "@/components/ForgotPassword";
@@ -40,6 +41,11 @@ export default new Router({
       path: "/stories/:id",
       name: "StoryArcs",
       component: StoryArcs
+    },
+    {
+      path: "/stories/:story_id/arcs/:id",
+      name: "Arc",
+      component: Arc
     },
     {
       path: "/new-story",

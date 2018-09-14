@@ -126,4 +126,26 @@ RSpec.describe Api::V1::ArcsController, type: :controller do
       }.to change(Arc, :count).by(-1)
     end
   end
+
+  describe 'PUT #upvote' do
+    let!(:arc) { create(:arc, story: story, user: user) }
+
+    it 'registers an upvote' do
+      request.cookies[JWTSessions.access_cookie] = @tokens[:access]
+      request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
+      expect {
+        put :upvote, params: { story_id: story.id, id: arc.id }
+      }.to change(arc.get_upvotes, :size).by(1)
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'registers a downvote' do
+      request.cookies[JWTSessions.access_cookie] = @tokens[:access]
+      request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
+      expect {
+        put :downvote, params: { story_id: story.id, id: arc.id }
+      }.to change(arc.get_downvotes, :size).by(1)
+      expect(response).to have_http_status(:ok)
+    end
+  end
 end

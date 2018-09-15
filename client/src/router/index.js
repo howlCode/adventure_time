@@ -53,7 +53,7 @@ export default new Router({
       component: StoryForm
     },
     {
-      path: "/story/:id/new-arc",
+      path: "/stories/:id/new-arc",
       name: "ArcForm",
       component: ArcForm
     },

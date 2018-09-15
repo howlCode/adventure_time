@@ -5,6 +5,8 @@
     <span class="vote-text has-text-primary">  {{ votesFor }} </span>
     <span @click="voteDown(arc)" class="button is-danger"><i class="fas fa-arrow-down"></i></span>
     <span class="vote-text has-text-danger">  {{ votesAgainst }} </span>
+      <h1>{{ repsonse }}</h1>
+
   </div>
 </template>
 
@@ -37,9 +39,7 @@ export default {
         .catch(error => this.voteFailed(error));
     },
     voteSuccessful(response) {
-      this.errors = "";
-      this.votesFor = this.arc.get_upvotes.length;
-      this.votesAgainst = this.arc.get_downvotes.length;
+      this.errors = error.response.data;
     },
     voteFailed(error) {
       this.errors = error.response.data;

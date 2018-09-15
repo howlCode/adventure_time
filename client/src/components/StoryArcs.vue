@@ -1,22 +1,8 @@
 <template>
   <section class="section">
     <div class="container">
-      <div class="columns is-multiline">
-        <div class="column is-half" v-for="unVotedArc in unVotedArcs" :key="unVotedArc.id">
-          <div class="message is-warning unvoted-arcs">
-          <header class="message-header">
-            <span class="is-italic is-pulled-right">
-              Written by: {{ unVotedArc.user.nickname }} 
-            </span>
-            <p class="is-pulled-right">Arc by: <span class="votes">Vote: UP | DOWN</span>
-            </p>
-          </header>
-          <div class="message-body">
-            {{ textTruncate(unVotedArc.body, 200) }} ...
-          </div>
-          </div>
-        </div>
-      </div>
+      <h2 class="subtitle">The story began...
+      <button @click="newArc" class="button is-primary is-pulled-right">Submit a New Story-Arc</button></h2>
       <div class="message">
         <header class="message-header">
           <p class="message-header-title">{{ story.title }}</p>
@@ -28,8 +14,8 @@
           <p>{{ story.body }} ...</p>
         </div>
       </div>
-      <h2 class="subtitle">The story continued...</h2>
       <div class="voted-arcs" v-for="arc in story.arcs" :key="arc.id">
+       <h2 class="subtitle">The story continued...</h2>
        <div class="message">
          <header class="message-header">
           <span class="votes has-text-danger">votes</span>
@@ -51,23 +37,7 @@ export default {
   name: "StoryArcs",
   data() {
     return {
-      story: "",
-      unVotedArcs: [
-        {
-          id: 1,
-          body: "please pick me",
-          user: {
-            nickname: "example_user"
-          }
-        },
-        {
-          id: 2,
-          body: "no no no please pick me",
-          user: {
-            nickname: "another_example_user"
-          }
-        }
-      ]
+      story: ""
     };
   },
   created() {
@@ -88,7 +58,13 @@ export default {
       if (!len && !end) return str;
       end = end || "...";
       return str.substr(0, len - end.length) + end;
+    },
+    newArc() {
+      this.$router.push(`/stories/${this.story.id}/new-arc`);
     }
   }
 };
 </script>
+
+<style>
+</style>

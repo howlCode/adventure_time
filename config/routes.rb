@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  get '/', to: redirect('/api/v1/stories')
 
   namespace :api do
     namespace :v1 do
+      get '/', controller: :stories, action: :index
+
       post 'refresh', controller: :refresh, action: :create
       post 'signin', controller: :signin, action: :create
       post 'signup', controller: :signup, action: :create

@@ -1,5 +1,6 @@
 <template>
   <form class="form-signin" @submit.prevent="signin">
+    <h1 class="has-text-danger" v-if="redirect">You must be logged in to do that!</h1>
     <div class="help is-danger" v-if="error">{{ error }}</div>
     <div class="field">
       <label class="label" for="email">Email address</label>
@@ -25,6 +26,7 @@
 <script>
 export default {
   name: "Signin",
+  props: ["redirect"],
   data() {
     return {
       email: "",

@@ -30,7 +30,8 @@ export default new Router({
     {
       path: "/signin",
       name: "Signin",
-      component: Signin
+      component: Signin,
+      props: true
     },
     {
       path: "/signup",

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_17_174200) do
+ActiveRecord::Schema.define(version: 2018_09_13_163135) do
 
   create_table "arcs", force: :cascade do |t|
     t.integer "story_id"
@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 2018_09_17_174200) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "inscribed", default: false
     t.index ["story_id"], name: "index_arcs_on_story_id"
     t.index ["user_id"], name: "index_arcs_on_user_id"
   end

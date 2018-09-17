@@ -30,6 +30,14 @@ export default {
       errors: ""
     };
   },
+  created() {
+    if (!this.$store.getters.isSignedIn) {
+      this.$router.push({
+        name: "Signin",
+        params: { redirect: true }
+      });
+    }
+  },
   methods: {
     submitStory() {
       this.$http.secured

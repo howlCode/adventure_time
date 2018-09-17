@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <div class="columns is-multiline">
-      <div class="column is-full" v-for="arc in arcs" :key="arc.id">    
+      <div class="column is-full" v-for="arc in arcs" :key="arc.id">
         <div class="message">
           <header class="message-header">
             <p class="message-header-title has-text-centered"> 
@@ -13,6 +13,7 @@
             <p>{{ textTruncate(arc.body, 175) }}</p>
             <span class="is-italic has-text-primary">
               Written by: {{ arc.user.nickname }}
+              {{ arc.expired }}
             </span>
             <VotingWidget v-bind:arc="arc"/>
           </div>
@@ -35,7 +36,7 @@ export default {
   },
   created() {
     this.$http.plain
-      .get("/all_unvoted_arcs")
+      .get("/all_arcs")
       .then(response => {
         this.arcs = response.data;
       })

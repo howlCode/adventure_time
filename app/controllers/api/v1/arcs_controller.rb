@@ -1,27 +1,22 @@
 module Api
   module V1
     class ArcsController < ApplicationController
-      before_action :authorize_access_request!, except: [:all_unvoted_arcs, :all_voted_arcs, :index, :show]
-      before_action :load_story, except: [:all_unvoted_arcs, :all_voted_arcs]
-      before_action :set_arc, except: [:all_unvoted_arcs, :all_voted_arcs, :create, :index]
+      before_action :authorize_access_request!, except: [:all_arcs, :index, :show]
+      before_action :load_story, except: [:all_arcs]
+      before_action :set_arc, except: [:all_arcs, :create, :index]
 
-      def all_unvoted_arcs
-        @arcs = Arc.where(inscribed: false)
-        render json: @arcs.as_json(include: [:story, :user, :votes_for, :get_upvotes, :get_downvotes, :inscribed])
-      end
-
-      def all_voted_arcs
-        @arcs = Arc.where(inscribed: true)
-        render json: @arcs.as_json(include: [:story, :user, :votes_for, :get_upvotes, :get_downvotes, :inscribed])
+      def all_arcs
+        @arcs = Arc.all
+        render json: @arcs.as_json(include: [:story, :user, :votes_for, :get_upvotes, :get_downvotes])
       end
 
       def index
         @arcs = @story.arcs.all
-        render json: @arcs.as_json(include: [:user, :votes_for, :get_upvotes, :get_downvotes, :inscribed])
+        render json: @arcs.as_json(include: [:user, :votes_for, :get_upvotes, :get_downvotes, :expired])
       end
 
       def show
-        render json: @arc.as_json(include: [:story, :user, :votes_for, :get_upvotes, :get_downvotes, :inscribed])
+        render json: @arc.as_json(include: [:story, :user, :votes_for, :get_upvotes, :get_downvotes, :expired])
       end
 
       def create
@@ -48,7 +43,7 @@ module Api
 
       def upvote
         @arc = Arc.find(params[:id])
-        if !@arc.inscribed
+        if !@arc.expired
           @arc.upvote_by current_user
           render json: {
             arc: @arc.as_json(include: [:get_upvotes, :get_downvotes]),
@@ -64,7 +59,7 @@ module Api
 
       def downvote
         @arc = Arc.find(params[:id])
-        if !@arc.inscribed
+        if !@arc.expired
           @arc.downvote_by current_user
             render json: {
               arc: @arc.as_json(include: [:get_upvotes, :get_downvotes]),

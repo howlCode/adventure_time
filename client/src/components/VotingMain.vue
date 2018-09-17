@@ -35,7 +35,7 @@ export default {
   },
   created() {
     this.$http.plain
-      .get("/arcs")
+      .get("/all_unvoted_arcs")
       .then(response => {
         this.arcs = response.data;
       })

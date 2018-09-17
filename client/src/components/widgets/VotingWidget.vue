@@ -1,10 +1,13 @@
 <template>
-  <div class="is-pulled-right">
+  <div v-if="isSignedIn()" class="is-pulled-right">
     <span class="help is-danger msg" v-if="errors">{{ errors }} </span>
-    <span @click="voteUp(arc)" class="button is-primary"><i class="fas fa-arrow-up"></i></span>
+    <span v-if="unVoted(arc)" @click="voteUp(arc)" class="button is-primary"><i class="fas fa-arrow-up"></i></span>
     <span class="vote-text has-text-primary">  {{ votesFor }} </span>
-    <span @click="voteDown(arc)" class="button is-danger"><i class="fas fa-arrow-down"></i></span>
+    <span v-if="unVoted(arc)" @click="voteDown(arc)" class="button is-danger"><i class="fas fa-arrow-down"></i></span>
     <span class="vote-text has-text-danger">  {{ votesAgainst }}</span>
+  </div>
+  <div v-else class="is-pulled-right">
+    <router-link to="/signin" class="button is-primary is-small">Sign in to vote!</router-link>
   </div>
 </template>
 
@@ -43,6 +46,14 @@ export default {
     },
     voteFailed(error) {
       this.errors = error.data.error;
+    },
+    unVoted(arc) {
+      if (arc.inscribed === false) {
+        return true;
+      }
+    },
+    isSignedIn() {
+      return this.$store.getters.isSignedIn;
     }
   }
 };

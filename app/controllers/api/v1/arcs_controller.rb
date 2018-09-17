@@ -1,12 +1,17 @@
 module Api
   module V1
     class ArcsController < ApplicationController
-      before_action :authorize_access_request!, except: [:all_arcs, :index, :show]
-      before_action :load_story, except: [:all_arcs]
-      before_action :set_arc, except: [:all_arcs, :create, :index]
+      before_action :authorize_access_request!, except: [:all_unvoted_arcs, :all_voted_arcs, :index, :show]
+      before_action :load_story, except: [:all_unvoted_arcs, :all_voted_arcs]
+      before_action :set_arc, except: [:all_unvoted_arcs, :all_voted_arcs, :create, :index]
 
-      def all_arcs
-        @arcs = Arc.all
+      def all_unvoted_arcs
+        @arcs = Arc.where(inscribed: false)
+        render json: @arcs.as_json(include: [:story, :user, :votes_for, :get_upvotes, :get_downvotes, :inscribed])
+      end
+
+      def all_voted_arcs
+        @arcs = Arc.where(inscribed: true)
         render json: @arcs.as_json(include: [:story, :user, :votes_for, :get_upvotes, :get_downvotes, :inscribed])
       end
 

@@ -20,7 +20,8 @@ Rails.application.routes.draw do
         end
       end
 
-      get 'arcs', controller: :arcs, action: :all_arcs
+      get 'all_unvoted_arcs', controller: :arcs, action: :all_unvoted_arcs
+      get 'all_voted_arcs', controller: :arcs, action: :all_voted_arcs
 
       resources :password_resets, only: [:create] do
         collection do

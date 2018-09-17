@@ -7,7 +7,7 @@ module Api
 
       def all_arcs
         @arcs = Arc.all
-        render json: @arcs.as_json(include: [:story, :user, :votes_for, :get_upvotes, :get_downvotes])
+        render json: @arcs.as_json(include: [:story, :user, :votes_for, :get_upvotes, :get_downvotes, :expired])
       end
 
       def index

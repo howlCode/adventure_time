@@ -2,7 +2,7 @@
   <section class="section">
     <div class="columns is-multiline">
       <div class="column is-full" v-for="arc in arcs" :key="arc.id">
-        <div class="message">
+        <div class="message" v-if="(!arc.expired)">
           <header class="message-header">
             <p class="message-header-title has-text-centered"> 
               <i class="far fa-eye icon"></i><span class="clickable" @click="showStory(arc.story)">See the full story!</span>

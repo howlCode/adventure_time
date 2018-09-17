@@ -7,16 +7,16 @@ module Api
 
       def all_arcs
         @arcs = Arc.all
-        render json: @arcs.as_json(include: [:story, :user, :votes_for, :get_upvotes, :get_downvotes])
+        render json: @arcs.as_json(include: [:story, :user, :votes_for, :get_upvotes, :get_downvotes, :inscribed])
       end
 
       def index
         @arcs = @story.arcs.all
-        render json: @arcs.as_json(include: [:user, :votes_for, :get_upvotes, :get_downvotes])
+        render json: @arcs.as_json(include: [:user, :votes_for, :get_upvotes, :get_downvotes, :inscribed])
       end
 
       def show
-        render json: @arc.as_json(include: [:story, :user, :votes_for, :get_upvotes, :get_downvotes])
+        render json: @arc.as_json(include: [:story, :user, :votes_for, :get_upvotes, :get_downvotes, :inscribed])
       end
 
       def create
@@ -43,22 +43,34 @@ module Api
 
       def upvote
         @arc = Arc.find(params[:id])
-        @arc.upvote_by current_user
-        render json: {
-          arc: @arc.as_json(include: [:get_upvotes, :get_downvotes]),
-          message: "Vote saved",
-          error: "Vote was not saved"
-        }
+        if !@arc.inscribed
+          @arc.upvote_by current_user
+          render json: {
+            arc: @arc.as_json(include: [:get_upvotes, :get_downvotes]),
+            message: "Vote saved",
+            error: "Vote was not saved"
+          }
+        else
+          render json: {
+            error: "Voting has ended"
+          }
+        end
       end
 
       def downvote
         @arc = Arc.find(params[:id])
-        @arc.downvote_by current_user
-        render json: {
-          arc: @arc.as_json(include: [:get_upvotes, :get_downvotes]),
-          message: "Vote saved",
-          error: "Vote was not saved"
-        }
+        if !@arc.inscribed
+          @arc.downvote_by current_user
+            render json: {
+              arc: @arc.as_json(include: [:get_upvotes, :get_downvotes]),
+              message: "Vote saved",
+              error: "Vote was not saved"
+          }
+        else
+          render json: {
+            error: "Voting has ended"
+          }
+        end
       end 
 
       private

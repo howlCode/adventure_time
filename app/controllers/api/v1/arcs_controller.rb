@@ -46,7 +46,7 @@ module Api
         @arc.upvote_by current_user
         render json: {
           arc: @arc.as_json(include: [:get_upvotes, :get_downvotes]),
-          message: "Vote was successfull",
+          message: "Vote saved",
           error: "Vote was not saved"
         }
       end
@@ -56,7 +56,7 @@ module Api
         @arc.downvote_by current_user
         render json: {
           arc: @arc.as_json(include: [:get_upvotes, :get_downvotes]),
-          message: "Vote was successfull",
+          message: "Vote saved",
           error: "Vote was not saved"
         }
       end 

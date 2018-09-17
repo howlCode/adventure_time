@@ -1,6 +1,6 @@
 <template>
   <div class="is-pulled-right">
-    <span class="help is-danger" v-if="errors">Error: {{ errors }} </span>
+    <span class="help is-danger msg" v-if="errors">{{ errors }} </span>
     <span @click="voteUp(arc)" class="button is-primary"><i class="fas fa-arrow-up"></i></span>
     <span class="vote-text has-text-primary">  {{ votesFor }} </span>
     <span @click="voteDown(arc)" class="button is-danger"><i class="fas fa-arrow-down"></i></span>
@@ -39,9 +39,10 @@ export default {
     voteSuccessful(response) {
       this.votesFor = response.data.arc.get_upvotes.length;
       this.votesAgainst = response.data.arc.get_downvotes.length;
+      this.errors = response.data.message;
     },
     voteFailed(error) {
-      this.errors = error.response.error;
+      this.errors = error.data.error;
     }
   }
 };
@@ -52,5 +53,8 @@ export default {
   font-size: 1.7rem;
   margin-left: 5px;
   margin-right: 5px;
+}
+.msg {
+  margin-top: -15px;
 }
 </style>

@@ -44,13 +44,21 @@ module Api
       def upvote
         @arc = Arc.find(params[:id])
         @arc.upvote_by current_user
-        render json: "Vote captured!"
+        render json: {
+          arc: @arc.as_json(include: [:get_upvotes, :get_downvotes]),
+          message: "Vote was successfull",
+          error: "Vote was not saved"
+        }
       end
 
       def downvote
         @arc = Arc.find(params[:id])
         @arc.downvote_by current_user
-        render json: "Vote captured!"
+        render json: {
+          arc: @arc.as_json(include: [:get_upvotes, :get_downvotes]),
+          message: "Vote was successfull",
+          error: "Vote was not saved"
+        }
       end 
 
       private

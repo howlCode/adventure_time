@@ -1,12 +1,10 @@
 <template>
   <div class="is-pulled-right">
-    <span v-if="errors">Error: {{ errors }} </span>
+    <span class="help is-danger" v-if="errors">Error: {{ errors }} </span>
     <span @click="voteUp(arc)" class="button is-primary"><i class="fas fa-arrow-up"></i></span>
     <span class="vote-text has-text-primary">  {{ votesFor }} </span>
     <span @click="voteDown(arc)" class="button is-danger"><i class="fas fa-arrow-down"></i></span>
-    <span class="vote-text has-text-danger">  {{ votesAgainst }} </span>
-      <h1>{{ repsonse }}</h1>
-
+    <span class="vote-text has-text-danger">  {{ votesAgainst }}</span>
   </div>
 </template>
 
@@ -39,10 +37,11 @@ export default {
         .catch(error => this.voteFailed(error));
     },
     voteSuccessful(response) {
-      this.errors = error.response.data;
+      this.votesFor = response.data.arc.get_upvotes.length;
+      this.votesAgainst = response.data.arc.get_downvotes.length;
     },
     voteFailed(error) {
-      this.errors = error.response.data;
+      this.errors = error.response.error;
     }
   }
 };

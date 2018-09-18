@@ -2,7 +2,8 @@
   <section class="section">
     <div class="container">
       <h2 class="subtitle has-text-light">The story began...
-      <button @click="newArc" class="button is-primary is-pulled-right">Submit a New Story-Arc</button></h2>
+      <button @click="newArc" class="button is-primary is-pulled-right is-hidden-mobile">Submit a New Story-Arc</button></h2>
+      <button @click="newArc" class="button is-small is-primary is-shown-mobile">Submit New Story-Arc</button>
       <div class="message">
         <header class="message-header">
           <p class="message-header-title">{{ story.title }}</p>
@@ -28,19 +29,24 @@
         </div>
        </div>
       <div class="container">
-      <h2 class="subtitle has-text-light" v-if="(!arc.expired)">How will the story continue?</h2>
-      <div class="message is-warning" v-if="(!arc.expired)">
-         <header class="message-header">
-          <p class="is-italic">
-            Written by: {{ arc.user.nickname }}
-          </p>
-          <span class="has-text-danger"><i class="fas fa-clock icon"></i>{{ arc.time_left }}</span>
-        </header>
-        <div class="message-body">
-          {{ textTruncate(arc.body, 175) }} ...
-          <VotingWidget v-bind:arc="arc" />
+        <h2 class="subtitle has-text-light" v-if="(!arc.expired)">How will the story continue?</h2>
+          <div class="message is-warning" v-if="(!arc.expired)">
+            <header class="message-header">
+              <p class="message-header-title has-text-centered"> 
+                <i class="far fa-eye icon"></i><span class="clickable" @click="showStory(arc.story)">See the full story!</span>
+                <i class="fab fa-readme icon"></i><span class="clickable" @click="showArc(arc)">Read the Story-Arc</span>
+              </p>
+              <span class="has-text-danger"><i class="fas fa-clock icon"></i>{{ arc.time_left }}</span>
+            </header>
+            <div class="message-body">
+              <p>{{ textTruncate(arc.body, 175) }}</p>
+              <span class="is-italic has-text-info">
+                Written by: {{ arc.user.nickname }}
+              </span>
+              <VotingWidget v-bind:arc="arc"/>
+            </div>
+          <span class="mobile-clickable" @click="showArc(arc)">Read the Story-Arc</span>
         </div>
-       </div>
        </div>
       </div>
     </div>
@@ -98,7 +104,40 @@ export default {
 </script>
 
 <style>
-.icon {
+@media (min-width: 768px) {
+  .icon {
+    margin-right: 10px;
+  }
+  .mobile-clickable {
+    display: none;
+  }
+  .is-shown-mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .icon {
+    display: none;
+  }
+  .message-header-title {
+    margin-right: 0px;
+    padding: 5px;
+    display: none;
+  }
+  .mobile-clickable {
+    padding: 10px;
+    color: blue;
+  }
+  .mobile-clickable:hover {
+    cursor: pointer;
+  }
+  .is-shown-mobile {
+    margin-bottom: 10px;
+  }
+}
+
+.clickable {
   margin-right: 10px;
 }
 </style>

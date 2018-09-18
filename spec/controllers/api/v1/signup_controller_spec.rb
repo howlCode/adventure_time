@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::SignupController, type: :controller do
 
   describe 'POST #create' do
-    let(:user_params) { { nickname: 'testing', email: 'test@email.com', password: 'password', password_confirmation: 'password' } }
+    let(:user_params) { { nickname: 'testing', email: 'test@email.com', password: 'p!assWord', password_confirmation: 'p!assWord' } }
 
     it 'returns http success' do
       post :create, params: user_params

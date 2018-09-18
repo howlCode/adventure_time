@@ -52,6 +52,7 @@ module Api
           }
         else
           render json: {
+            message: "Already voted!",
             error: "Voting has ended"
           }
         end
@@ -68,6 +69,7 @@ module Api
           }
         else
           render json: {
+            message: "Already voted!",
             error: "Voting has ended"
           }
         end

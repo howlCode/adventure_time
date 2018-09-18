@@ -58,10 +58,12 @@ export default {
 </script>
 
 <style scoped>
-.vote-text {
-  font-size: 1.7rem;
-  margin-left: 5px;
-  margin-right: 5px;
+@media (min-width: 768px) {
+  .vote-text {
+    font-size: 1.7rem;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
 }
 .msg {
   margin-top: -15px;

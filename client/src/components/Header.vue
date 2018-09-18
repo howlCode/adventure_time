@@ -3,13 +3,13 @@
     <nav class="navbar is-dark" aria-label="main navigation">
       <div class="navbar-brand">
         <i class="far fa-star"></i><router-link class="logo-link" to="/"><h1 id="logo">Inscribed</h1></router-link>
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <a role="button" class="navbar-burger" @click="showNav = !showNav" :class="{ 'is-active': showNav }" aria-label="menu" aria-expanded="false">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
       </div>
-      <div class="navbar-menu">
+      <div class="navbar-menu" :class="{ 'is-active': showNav }">
         <div class="navbar-start">
           <i class="far fa-thumbs-up nav-icon has-text-primary"></i>
           <router-link class="navbar-item" to="/">Vote on New Story-Arcs!</router-link>
@@ -35,7 +35,8 @@ export default {
   name: "Header",
   data() {
     return {
-      error: ""
+      error: "",
+      showNav: false
     };
   },
   methods: {
@@ -80,5 +81,10 @@ export default {
 }
 .nav-icon {
   margin-top: 20px;
+}
+@media (max-width: 1087px) {
+  .nav-icon {
+    display: none;
+  }
 }
 </style>

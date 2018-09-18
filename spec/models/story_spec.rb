@@ -13,5 +13,10 @@ RSpec.describe Story, type: :model do
     story = Story.new(title: nil, body: nil, user: user)
     expect(story).to_not be_valid
   end
+
+  it "is not valid without a user" do
+    story = Story.new(title: "test title", body: "test body", user: nil)
+    expect(story).to_not be_valid
+  end
   
 end

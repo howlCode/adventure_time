@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::SigninController, type: :controller do
 
   describe 'POST #create' do
-    let(:password) { 'password' }
+    let(:password) { 'p!assWord' }
     let(:user) { create(:user) }
     let(:user_params) { { nickname: user.nickname, email: user.email, password: password } }
 

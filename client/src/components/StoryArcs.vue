@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <div class="container">
-      <h2 class="subtitle">The story began...
+      <h2 class="subtitle has-text-light">The story began...
       <button @click="newArc" class="button is-primary is-pulled-right">Submit a New Story-Arc</button></h2>
       <div class="message">
         <header class="message-header">
@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="voted-arcs" v-for="arc in arcs" :key="arc.id">
-       <h2 class="subtitle" v-if="(arc.expired)">The story continued...</h2>
+       <h2 class="subtitle has-text-light" v-if="(arc.expired)">The story continued...</h2>
        <div class="message" v-if="(arc.expired)">
          <header class="message-header">
           <span class="votes has-text-danger">Won With {{ arc.get_upvotes.length }} Votes</span>
@@ -27,18 +27,20 @@
           {{ arc.body }} ...
         </div>
        </div>
-      <h2 class="subtitle" v-if="(!arc.expired)">How will the story continue?</h2>
+      <div class="container">
+      <h2 class="subtitle has-text-light" v-if="(!arc.expired)">How will the story continue?</h2>
       <div class="message is-warning" v-if="(!arc.expired)">
          <header class="message-header">
-          <span class="is-italic">
+          <p class="is-italic">
             Written by: {{ arc.user.nickname }}
-          </span>
+          </p>
           <span class="has-text-danger"><i class="fas fa-clock icon"></i>{{ arc.time_left }}</span>
         </header>
         <div class="message-body">
-          {{ arc.body }} ...
+          {{ textTruncate(arc.body, 175) }} ...
           <VotingWidget v-bind:arc="arc" />
         </div>
+       </div>
        </div>
       </div>
     </div>

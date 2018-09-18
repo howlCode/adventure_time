@@ -4,6 +4,7 @@
       <div class="message">
         <header class="message-header">
           <p class="message-header-title">Written by: {{ arc.user.nickname }}</p>
+          <span class="has-text-danger"><i class="fas fa-clock icon"></i>{{ arc.time_left }}</span>
         </header>
         <div class="message-body story-text">
           <p>{{ arc.body }} <VotingWidget v-f="!arc.expired" v-bind:arc="arc" /></p>
@@ -45,3 +46,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.icon {
+  margin-right: 10px;
+}
+</style>

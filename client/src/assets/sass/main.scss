@@ -18,42 +18,15 @@
   }
 }
 
+.message {
+  box-shadow: 5px 10px;
+}
+
 .message-header-title {
   text-transform: capitalize;
 }
 
-.main-story {
-  @include swell;
-
-  &:hover {
-    cursor: pointer;
-    @include hoverSwell();
-  }
-}
-
-.modal-background {
-  background-color: rgba(33, 33, 33, 0.95);
-}
-
-.modal-content {
-  width: 90%;
-  overflow: hidden;
-}
-
-.arc-text {
-  color: hsl(96, 23%, 50%);
-}
-
-.arc-titles-text a {
-  color: #fff;
-  font-size: 1rem;
-
-  &:hover {
-    color: #ec4c64;
-  }
-}
-
-.unvoted-arcs {
+.hover-story {
   @include swell;
 
   &:hover {

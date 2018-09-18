@@ -3,20 +3,20 @@
     <div class="help is-info" v-if="notice">{{ notice }}</div>
     <div class="help is-danger" v-if="error">{{ error }}</div>
     <div class="field">
-      <label class="label" for="password">New Password</label>
+      <label class="label has-text-light" for="password">New Password</label>
       <div class="control">
         <input v-model="password" type="password" class="input" id="password" placeholder="Password">
       </div>
     </div>
     <div class="field">
-      <label class="label" for="password">Password Confirmation</label>
+      <label class="label has-text-light" for="password">Password Confirmation</label>
       <div class="control">
         <input v-model="password_confirmation" type="password" class="input" id="password_confirmation" placeholder="Password Confirmation">
       </div>
     </div>
     <button type="submit" class="button is-primary">Reset password</button>
     <div>
-      <router-link to="/singin">Sign in</router-link>
+      <router-link to="/singin" class="has-text-info">Sign in</router-link>
     </div>
   </form>
 </template>

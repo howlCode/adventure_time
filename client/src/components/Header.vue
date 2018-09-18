@@ -2,7 +2,7 @@
   <section>
     <nav class="navbar is-dark" aria-label="main navigation">
       <div class="navbar-brand">
-        <i class="far fa-star"></i><router-link class="logo-link" to="/"><h1 id="logo">Adventure Time</h1></router-link>
+        <i class="far fa-star"></i><router-link class="logo-link" to="/"><h1 id="logo">Inscribed</h1></router-link>
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>

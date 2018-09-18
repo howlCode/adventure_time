@@ -3,16 +3,16 @@
     <div class="help is-info" v-if="notice">{{ notice }}</div>
     <div class="help is-danger" v-if="error">{{ error }}</div>
     <div class="field">
-      <label class="label" for="email">Email address</label>
+      <label class="label has-text-light" for="email">Email address</label>
       <div class="control">
         <input v-model="email" type="email" class="input" id="email" placeholder="email@example.com">
       </div>
     </div>
     <button type="submit" class="button is-primary">Reset Password</button>
     <div>
-      <router-link to="/signin">Sign in</router-link>
+      <router-link to="/signin" class="has-text-info">Sign in</router-link>
       <br />
-      <router-link to="/signup">Sign up</router-link>
+      <router-link to="/signup" class="has-text-info">Sign up</router-link>
     </div>
   </form>
 </template>

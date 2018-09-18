@@ -3,22 +3,22 @@
     <h1 class="has-text-danger" v-if="redirect">You must be logged in to do that!</h1>
     <div class="help is-danger" v-if="error">{{ error }}</div>
     <div class="field">
-      <label class="label" for="email">Email address</label>
+      <label class="label has-text-light" for="email">Email address</label>
       <div class="control">
         <input v-model="email" type="email" class="input" id="email" placeholder="email@example.com">
       </div>
     </div>
     <div class="field">
-      <label class="label" for="password">Password</label>
+      <label class="label has-text-light" for="password">Password</label>
       <div class="control">
         <input v-model="password" type="password" class="input" id="password" placeholder="Password">
       </div>
     </div>
-    <button type="submit" class="button is-primary">Sign in</button>
+    <button type="submit" class="button is-info">Sign in</button>
     <div>
-      <router-link to="/signup">Sign up</router-link>
+      <router-link to="/signup" class="has-text-success">Sign up</router-link>
       <br />
-      <router-link to="/forgot_password">Forgot Password</router-link>
+      <router-link to="/forgot_password" class="has-text-success">Forgot Password</router-link>
     </div>
   </form>
 </template>

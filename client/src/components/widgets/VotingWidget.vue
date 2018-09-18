@@ -1,13 +1,13 @@
 <template>
   <div v-if="isSignedIn()" class="is-pulled-right">
     <span class="help is-danger msg" v-if="errors">{{ errors }} </span>
-    <span v-if="!isExpired(arc)" @click="voteUp(arc)" class="button is-primary"><i class="fas fa-arrow-up"></i></span>
-    <span class="vote-text has-text-primary">  {{ votesFor }} </span>
+    <span v-if="!isExpired(arc)" @click="voteUp(arc)" class="button is-info"><i class="fas fa-arrow-up"></i></span>
+    <span class="vote-text has-text-info">  {{ votesFor }} </span>
     <span v-if="!isExpired(arc)" @click="voteDown(arc)" class="button is-danger"><i class="fas fa-arrow-down"></i></span>
     <span class="vote-text has-text-danger">  {{ votesAgainst }}</span>
   </div>
   <div v-else class="is-pulled-right">
-    <router-link to="/signin" class="button is-primary is-small">Sign in to vote!</router-link>
+    <router-link to="/signin" class="button is-danger is-small">Sign in to vote!</router-link>
   </div>
 </template>
 

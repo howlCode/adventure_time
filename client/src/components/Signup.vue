@@ -2,32 +2,32 @@
   <form class="form-signup" @submit.prevent="signup">
     <div class="help is-danger" v-if="error">{{ error }}</div>
     <div class="field">
-      <label class="label" for="email">Email address</label>
+      <label class="label has-text-light" for="email">Email address</label>
       <div class="control">
         <input v-model="email" type="email" class="input" id="email" placeholder="email@example.com">
       </div>
     </div>
     <div class="field">
-      <label class="label" for="nickname">Nickname</label>
+      <label class="label has-text-light" for="nickname">Nickname</label>
       <div class="control">
         <input v-model="nickname" type="text" class="input" id="nickname" placeholder="StoryWriter101">
       </div>
     </div>
     <div class="field">
-      <label class="label" for="password">Password</label>
+      <label class="label has-text-light" for="password">Password</label>
       <div class="control">
         <input v-model="password" type="password" class="input" id="password" placeholder="Password">
       </div>
     </div>
     <div class="field">
-      <label class="label" for="password">Password Confirmation</label>
+      <label class="label has-text-light" for="password">Password Confirmation</label>
       <div class="control">
         <input v-model="password_confirmation" type="password" class="input" id="password_confirmation" placeholder="Password Confirmation">
       </div>
     </div>
-    <button type="submit" class="button is-primary">Sign up</button>
+    <button type="submit" class="button is-info">Sign up</button>
     <div>
-      <router-link to="/signin">Sign in</router-link>
+      <router-link to="/signin" class="has-text-success">Sign in</router-link>
     </div>
   </form>
 </template>

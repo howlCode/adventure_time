@@ -1,18 +1,21 @@
 <template>
   <section class="section">
+    <h1 class="title has-text-light">Welcome to Inscribed!</h1>
+    <h2 class="subtitle has-text-light">Where Creativity and Community Meet</h2>
+    <router-link to="/signup" class="has-text-info">Sign Up Here</router-link>
     <div class="columns is-multiline">
       <div class="column is-full" v-for="arc in arcs" :key="arc.id">
         <div class="message" v-if="!isExpired(arc)">
           <header class="message-header">
             <p class="message-header-title has-text-centered"> 
               <i class="far fa-eye icon"></i><span class="clickable" @click="showStory(arc.story)">See the full story!</span>
-              <i class="fab fa-readme icon"></i><span class="clickable" @click="showArc(arc)">Read this Story Arc</span>
-              <span class="has-text-warning"><i class="fas fa-clock icon"></i>{{ arc.time_left }}</span>
+              <i class="fab fa-readme icon"></i><span class="clickable" @click="showArc(arc)">Read the Story-Arc</span>
             </p>
+            <span class="has-text-warning"><i class="fas fa-clock icon"></i>{{ arc.time_left }}</span>
           </header>
           <div class="message-body">
             <p>{{ textTruncate(arc.body, 175) }}</p>
-            <span class="is-italic has-text-primary">
+            <span class="is-italic has-text-info">
               Written by: {{ arc.user.nickname }}
             </span>
             <VotingWidget v-bind:arc="arc"/>

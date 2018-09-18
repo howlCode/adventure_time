@@ -5,18 +5,19 @@
         <p class="has-text-danger">{{ key.toUpperCase() }} - {{ value }}</p>
     </div>
     <div class="field">
-      <label class="label" for="title">Title</label>
+      <label class="label has-text-light" for="title">Title</label>
       <div class="control">
         <input v-model="title" type="title" class="input" id="title" placeholder="The Great Title">
       </div>
     </div>
     <div class="field">
-      <label class="label" for="body">Story</label>
+      <label class="label has-text-light" for="body">Story</label>
       <div class="control">
         <textarea v-model="body" class="textarea" id="body" rows="15" placeholder="Once upon a time..."></textarea>
       </div>
     </div>
     <button type="submit" class="button is-primary">Submit</button>
+    <router-link to="/" class="button is-danger">Cancel</router-link>
   </form>
 </template>
 

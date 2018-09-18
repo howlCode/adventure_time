@@ -1,5 +1,6 @@
 <template>
   <section class="section">
+    <transition appear enter-active-class="animated slideInUp">
       <div class="columns is-multiline">
         <div class="column is-full" v-for="story in stories" :key="story.id">     
           <div class="message hover-story" @click="showStory(story)">
@@ -21,6 +22,7 @@
           </div>
         </div>
       </div>
+    </transition>
   </section>
 </template>
 

@@ -1,4 +1,5 @@
 <template>
+  <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
   <form class="form-story-arc" @submit.prevent="submitStory">
     <div class="has-text-centered" v-if="errors" v-for="(value, key) in errors" :key="key">
       <h2>Story-Arc Could Not Be Created:</h2>
@@ -13,6 +14,7 @@
     <button type="submit" class="button is-primary">Submit</button>
     <router-link to="/" class="button is-danger">Cancel</router-link>
   </form>
+  </transition>
 </template>
 
 <script>

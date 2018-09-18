@@ -1,4 +1,5 @@
 <template>
+  <transition appear enter-active-class="animated fadeIn">
   <section class="section">
     <div class="container">
       <h2 class="subtitle has-text-light">The story began...
@@ -51,6 +52,7 @@
       </div>
     </div>
   </section>
+  </transition>
 </template>
 
 <script>

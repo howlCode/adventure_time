@@ -54,7 +54,9 @@ export default {
     },
     showStory(story) {
       const storyId = story.id;
-      this.$router.push({ path: `/stories/${storyId}` });
+      this.$router.push({
+        path: `/stories/${storyId}`
+      });
     },
     newArc() {
       const storyId = this.story.id;

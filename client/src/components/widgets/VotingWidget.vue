@@ -1,9 +1,9 @@
 <template>
   <div v-if="isSignedIn()" class="is-pulled-right">
     <span class="help is-danger msg" v-if="errors">{{ errors }} </span>
-    <span v-if="unVoted(arc)" @click="voteUp(arc)" class="button is-primary"><i class="fas fa-arrow-up"></i></span>
+    <span v-if="!isExpired(arc)" @click="voteUp(arc)" class="button is-primary"><i class="fas fa-arrow-up"></i></span>
     <span class="vote-text has-text-primary">  {{ votesFor }} </span>
-    <span v-if="unVoted(arc)" @click="voteDown(arc)" class="button is-danger"><i class="fas fa-arrow-down"></i></span>
+    <span v-if="!isExpired(arc)" @click="voteDown(arc)" class="button is-danger"><i class="fas fa-arrow-down"></i></span>
     <span class="vote-text has-text-danger">  {{ votesAgainst }}</span>
   </div>
   <div v-else class="is-pulled-right">
@@ -45,12 +45,10 @@ export default {
       this.errors = response.data.message;
     },
     voteFailed(error) {
-      this.errors = error.data.error;
+      this.errors = error.data;
     },
-    unVoted(arc) {
-      if (arc.inscribed === false) {
-        return true;
-      }
+    isExpired(arc) {
+      return arc.expired;
     },
     isSignedIn() {
       return this.$store.getters.isSignedIn;

@@ -6,15 +6,15 @@ module Api
 
       def index
         @stories = Story.all
-        render json: @stories.as_json(include: [:arcs, :user])
+        render json: @stories
       end
 
       def show
-        render json: @story.as_json(include: [:user, arcs: { include: :user }])
+        render json: @story
       end
 
       def create
-        @story = current_user.stories.build(story_params)
+        @story = the_current_user.stories.build(story_params)
 
         if @story.save
           render json: @story, status: :created, location: api_v1_story_path(@story)

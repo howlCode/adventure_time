@@ -6,7 +6,7 @@
           <p class="message-header-title">Written by: {{ arc.user.nickname }}</p>
         </header>
         <div class="message-body story-text">
-          <p>{{ arc.body }} <VotingWidget v-bind:arc="arc" /></p>
+          <p>{{ arc.body }} <VotingWidget v-f="!arc.expired" v-bind:arc="arc" /></p>
         </div>
       </div>
     </div>

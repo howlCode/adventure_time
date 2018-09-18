@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
 
   private
 
-    def current_user
+    def the_current_user
       @current_user ||= User.find(payload['user_id'])
     end
 

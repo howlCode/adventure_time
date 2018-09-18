@@ -14,11 +14,11 @@
           <p>{{ story.body }} ...</p>
         </div>
       </div>
-      <div class="voted-arcs" v-for="arc in story.arcs" :key="arc.id">
-       <h2 class="subtitle">The story continued...</h2>
-       <div class="message">
+      <div class="voted-arcs" v-for="arc in arcs" :key="arc.id">
+       <h2 class="subtitle" v-if="(arc.expired)">The story continued...</h2>
+       <div class="message" v-if="(arc.expired)">
          <header class="message-header">
-          <span class="votes has-text-danger">votes</span>
+          <span class="votes has-text-danger">Won With {{ arc.get_upvotes.length }} Votes</span>
           <span class="is-italic is-pulled-right">
             Written by: {{ arc.user.nickname }}
           </span>
@@ -27,17 +27,36 @@
           {{ arc.body }} ...
         </div>
        </div>
+      <h2 class="subtitle" v-if="(!arc.expired)">How will the story continue?</h2>
+      <div class="message is-warning" v-if="(!arc.expired)">
+         <header class="message-header">
+          <span class="is-italic">
+            Written by: {{ arc.user.nickname }}
+          </span>
+          <span class="has-text-danger"><i class="fas fa-clock icon"></i>{{ arc.time_left }}</span>
+        </header>
+        <div class="message-body">
+          {{ arc.body }} ...
+          <VotingWidget v-bind:arc="arc" />
+        </div>
+       </div>
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import VotingWidget from "@/components/widgets/VotingWidget";
+
 export default {
   name: "StoryArcs",
+  components: {
+    VotingWidget
+  },
   data() {
     return {
-      story: ""
+      story: "",
+      arcs: ""
     };
   },
   created() {
@@ -47,6 +66,12 @@ export default {
         this.story = response.data;
       })
       .catch(error => this.setError(error, "Something went wrong"));
+    this.$http.plain
+      .get(`/stories/${this.$route.params.id}/arcs/`)
+      .then(response => {
+        this.arcs = response.data;
+      })
+      .catch(error => this.setError((error, "Something went wrong")));
   },
   methods: {
     setError(error, text) {
@@ -61,10 +86,17 @@ export default {
     },
     newArc() {
       this.$router.push(`/stories/${this.story.id}/new-arc`);
+    },
+    showArc(arc) {
+      const storyId = arc.story.id;
+      this.$router.push({ path: `/stories/${storyId}/arcs/${arc.id}` });
     }
   }
 };
 </script>
 
 <style>
+.icon {
+  margin-right: 10px;
+}
 </style>

@@ -7,20 +7,20 @@ module Api
 
       def all_arcs
         @arcs = Arc.all
-        render json: @arcs.as_json(include: [:story, :user, :votes_for, :get_upvotes, :get_downvotes, :expired])
+        render json: @arcs
       end
 
       def index
         @arcs = @story.arcs.all
-        render json: @arcs.as_json(include: [:user, :votes_for, :get_upvotes, :get_downvotes, :expired])
+        render json: @arcs
       end
 
       def show
-        render json: @arc.as_json(include: [:story, :user, :votes_for, :get_upvotes, :get_downvotes, :expired])
+        render json: @arc
       end
 
       def create
-        @arc = current_user.arcs.build(arc_params)
+        @arc = the_current_user.arcs.build(arc_params)
 
         if @arc.save
           render json: @arc, status: :created, location: api_v1_story_arc_path(@story, @arc)
@@ -44,11 +44,11 @@ module Api
       def upvote
         @arc = Arc.find(params[:id])
         if !@arc.expired
-          @arc.upvote_by current_user
+          @arc.upvote_by the_current_user
           render json: {
-            arc: @arc.as_json(include: [:get_upvotes, :get_downvotes]),
+            arc: @arc.as_json(methods: [:expired, :get_downvotes, :get_upvotes]),
             message: "Vote saved",
-            error: "Vote was not saved"
+            error: "Vote was not saved due to server error"
           }
         else
           render json: {
@@ -60,11 +60,11 @@ module Api
       def downvote
         @arc = Arc.find(params[:id])
         if !@arc.expired
-          @arc.downvote_by current_user
+          @arc.downvote_by the_current_user
             render json: {
-              arc: @arc.as_json(include: [:get_upvotes, :get_downvotes]),
+              arc: @arc.as_json(methods: [:expired, :get_downvotes, :get_upvotes]),
               message: "Vote saved",
-              error: "Vote was not saved"
+              error: "Vote was not saved due to server error"
           }
         else
           render json: {

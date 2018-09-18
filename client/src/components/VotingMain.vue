@@ -2,18 +2,18 @@
   <section class="section">
     <div class="columns is-multiline">
       <div class="column is-full" v-for="arc in arcs" :key="arc.id">
-        <div class="message" v-if="(!arc.expired)">
+        <div class="message" v-if="!isExpired(arc)">
           <header class="message-header">
             <p class="message-header-title has-text-centered"> 
               <i class="far fa-eye icon"></i><span class="clickable" @click="showStory(arc.story)">See the full story!</span>
               <i class="fab fa-readme icon"></i><span class="clickable" @click="showArc(arc)">Read this Story Arc</span>
+              <span class="has-text-warning"><i class="fas fa-clock icon"></i>{{ arc.time_left }}</span>
             </p>
           </header>
           <div class="message-body">
             <p>{{ textTruncate(arc.body, 175) }}</p>
             <span class="is-italic has-text-primary">
               Written by: {{ arc.user.nickname }}
-              {{ arc.expired }}
             </span>
             <VotingWidget v-bind:arc="arc"/>
           </div>
@@ -67,6 +67,9 @@ export default {
     },
     isSignedIn() {
       return this.$store.getters.isSignedIn;
+    },
+    isExpired(arc) {
+      return arc.expired;
     }
   },
   components: {

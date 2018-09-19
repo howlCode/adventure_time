@@ -1,17 +1,31 @@
-# Adventure Time
+# Inscribed
 
-An app that follows the "choose-your-own adventure" theme but with a user-voting system twist. A user can start a story, and submit a potential new arc for the story, other users can then vote on that arc and other user-submitted arcs to determine the next iteration of the adventure.
+## What is it?
 
-## MODELS:
+Welcome to Inscribed! A community and vote-driven choose your own adventure style creativity platform. As a user, you can create new stories, and then other users can create a new story arc that will continue that story. The story-arcs are determined by a voting system in where each story-arc has a 24 hour voting window, the arc with the most votes is inscribed to the story and it continues on to the next arc.
 
-USER - Oauth for session mgmnt. has_many stories. has_many arcs. has_many votes
---SCHEMA: ?
+## How can I use it?
 
-STORY - belongs_to USER. has_many votes. has_many arcs
---SCHEMA: title:string, body:text
+Please visit [Inscribed](http://www.example.com) for a visual example I've created using the API.
 
-ARC - belongs_to USER, STORY. has_many votes
---SCHEMA: body:text
+The API has these unique endpoints:
 
-VOTE - belongs_to USER, STORY, ARC
---SCHEMA: casted_vote:boolean
+_All are prefixed with /api/v1/_
+
+'/stories' - Will grab all stories as one object
+
+'/all_arcs' - Pulls ALL story-arcs for all stories
+
+'/stories/:story_id' - Pulls an individual story
+
+'/stories/:story_id/arcs/:arc_id' - Pulls an individual story-arc
+
+### Model Methods
+
+A story-arc has the following additional methods:
+
+'expired' - Will inform you if the story-arc is older than 24hrs
+
+'time_left' - Returns the date and time that the voting window closes(24hrs after creation)
+
+'inscribed' - #TODO Returns if the story-arc was voted on or not

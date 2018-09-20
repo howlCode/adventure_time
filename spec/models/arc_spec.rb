@@ -1,7 +1,9 @@
 require 'rails_helper'
+require "#{Rails.root}/lib/tasks/inscribe.rb"
 
 RSpec.describe Arc, type: :model do
   include ActiveSupport::Testing::TimeHelpers
+  include Inscribe
 
   let(:user) { create(:user) }
   let(:story) { create(:story) }
@@ -42,6 +44,30 @@ RSpec.describe Arc, type: :model do
     fake_time = arc.created_at.advance(days: 1.1)
     travel_to fake_time
     expect(arc.expired).to be_truthy
+  end
+
+  it "after #inscribe it is a winner" do
+    arc = Arc.create!(body: "test", user: user, story: story)
+    arc2 = Arc.create!(body: "test", user: user, story: story)
+    arc.expiry = DateTime.yesterday.in_time_zone(Time.zone)
+    arc2.expiry = DateTime.yesterday.in_time_zone(Time.zone)
+    arc.upvote_by user
+    arc2.downvote_by user
+    arcs = [arc, arc2]
+    inscribe(arcs)
+    expect(arc.inscribed).to be_truthy
+  end
+
+  it "after #inscribe it is a loser" do
+    arc = Arc.create!(body: "test", user: user, story: story)
+    arc2 = Arc.create!(body: "test", user: user, story: story)
+    arc.expiry = DateTime.yesterday.in_time_zone(Time.zone)
+    arc2.expiry = DateTime.yesterday.in_time_zone(Time.zone)
+    arc.downvote_by user
+    arc2.upvote_by user
+    arcs = [arc, arc2]
+    inscribe(arcs)
+    expect(arc.inscribed).to be_falsey
   end
 
 end

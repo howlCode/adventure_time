@@ -1,12 +1,11 @@
 module Inscribe
-  def inscribe
-    all_arcs = Arc.all
+  def inscribe(arcs)
+    all_arcs = arcs
     current_arcs = []
     votes = []
 
     all_arcs.each do |arc|
       if arc.expiry.to_date == DateTime.yesterday.in_time_zone(Time.zone).to_date
-        # Date.current.end_of_day.in_time_zone(Time.zone)
         current_arcs.push(arc)
       end
     end

@@ -1,4 +1,5 @@
 <template>
+  <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
   <form class="form-signin" @submit.prevent="signin">
     <h1 class="has-text-danger" v-if="redirect">You must be logged in to do that!</h1>
     <div class="help is-danger" v-if="error">{{ error }}</div>
@@ -21,6 +22,7 @@
       <router-link to="/forgot_password" class="has-text-success">Forgot Password</router-link>
     </div>
   </form>
+  </transition>
 </template>
 
 <script>

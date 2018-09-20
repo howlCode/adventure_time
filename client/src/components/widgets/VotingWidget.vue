@@ -1,6 +1,8 @@
 <template>
   <div v-if="isSignedIn()" class="is-pulled-right">
-    <span class="help is-danger msg" v-if="errors">{{ errors }} </span>
+    <transition appear enter-active-class="animated fadeIn">
+    <span class="help is-danger msg" v-if="errors">{{ errors }}</span>
+    </transition>
     <span v-if="!isExpired(arc)" @click="voteUp(arc)" class="button is-info"><i class="fas fa-arrow-up"></i></span>
     <span class="vote-text has-text-info">  {{ votesFor }} </span>
     <span v-if="!isExpired(arc)" @click="voteDown(arc)" class="button is-danger"><i class="fas fa-arrow-down"></i></span>
@@ -67,5 +69,6 @@ export default {
 }
 .msg {
   margin-top: -15px;
+  margin-left: 75px;
 }
 </style>

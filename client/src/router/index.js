@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Signin from "@/components/Signin";
 import Signup from "@/components/Signup";
 
+import Main from "@/components/Main";
 import VotingMain from "@/components/VotingMain";
 import Stories from "@/components/Stories";
 import StoryArcs from "@/components/StoryArcs";
@@ -18,12 +19,17 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
+      path: "/",
+      name: "Main",
+      component: Main
+    },
+    {
       path: "/stories",
       name: "Stories",
       component: Stories
     },
     {
-      path: "/",
+      path: "/new-arcs",
       name: "VotingMain",
       component: VotingMain
     },

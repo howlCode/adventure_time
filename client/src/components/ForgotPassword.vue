@@ -1,4 +1,5 @@
 <template>
+  <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
   <form class="form-forgot-password" @submit.prevent="submit">
     <div class="help is-info" v-if="notice">{{ notice }}</div>
     <div class="help is-danger" v-if="error">{{ error }}</div>
@@ -15,6 +16,7 @@
       <router-link to="/signup" class="has-text-info">Sign up</router-link>
     </div>
   </form>
+  </transition>
 </template>
 
 <script>

@@ -20,6 +20,7 @@ gem 'jwt_sessions'
 gem 'rack-cors', require: 'rack/cors'
 gem 'active_model_serializers'
 gem 'acts_as_votable'
+gem 'whenever', require: false
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -42,6 +43,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'whenever', require: false
 end
 
 group :test do

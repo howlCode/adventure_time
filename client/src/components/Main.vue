@@ -1,5 +1,10 @@
 <template>
   <section class="section">
+    <transition appear enter-active-class="animated fadeIn">
+    <h1 class="title has-text-light">Welcome to Inscribed!</h1>
+    </transition>
+    <h2 class="subtitle has-text-light">Where Creativity and Community Meet</h2>
+    <router-link v-if="!isSignedIn()" to="/signup" class="has-text-info">Sign Up Here</router-link>
     <transition appear enter-active-class="animated slideInUp">
       <div class="columns is-multiline">
         <div class="column is-full" v-for="story in stories" :key="story.id">     
@@ -28,7 +33,7 @@
 
 <script>
 export default {
-  name: "Stories",
+  name: "Main",
   data() {
     return {
       stories: []
@@ -62,6 +67,9 @@ export default {
     newArc() {
       const storyId = this.story.id;
       this.$router.push({ path: `/story/${storyId}/new-arc` });
+    },
+    isSignedIn() {
+      return this.$store.getters.isSignedIn;
     }
   }
 };

@@ -44,6 +44,7 @@ module Api
         def story_params
           params.require(:story).permit(:title, :body)
         end
+          
     end
   end
 end

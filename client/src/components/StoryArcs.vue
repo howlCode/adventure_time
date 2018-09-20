@@ -1,40 +1,44 @@
 <template>
   <transition appear enter-active-class="animated fadeIn">
-  <section class="section">
-    <div class="container">
-      <h2 class="subtitle has-text-light">The story began...
-      <button @click="newArc" class="button is-primary is-pulled-right is-hidden-mobile">Submit a New Story-Arc</button></h2>
-      <button @click="newArc" class="button is-small is-primary is-shown-mobile">Submit New Story-Arc</button>
-      <div class="message">
-        <header class="message-header">
-          <p class="message-header-title">{{ story.title }}</p>
-          <span class="is-italic is-pulled-right">
-          Written by: {{ story.user.nickname }}
-          </span>
-        </header>
-        <div class="message-body story-text">
-          <p>{{ story.body }} ...</p>
+    <div v-if="loading"><h1>LOADING....</h1></div>
+  <section class="section" v-if="!loading">
+    <h2 class="subtitle has-text-light">The story began...
+    <button @click="newArc" class="button is-primary is-pulled-right is-hidden-mobile">Submit a New Story-Arc</button></h2>
+    <button @click="newArc" class="button is-small is-primary is-shown-mobile">Submit New Story-Arc</button>
+    <div class="columns is-multiline">
+      <div class="column is-full">
+        <div class="message">
+          <header class="message-header">
+            <p class="message-header-title">{{ story.title }}</p>
+            <span class="is-italic is-pulled-right">
+            Written by: {{ story.user.nickname }}
+            </span>
+          </header>
+          <div class="message-body story-text">
+            <p>{{ story.body }}</p>
+          </div>
         </div>
       </div>
-      <div class="voted-arcs" v-for="arc in arcs" :key="arc.id">
-       <h2 class="subtitle has-text-light" v-if="(arc.expired)">The story continued...</h2>
-       <div class="message" v-if="(arc.expired)">
-         <header class="message-header">
-          <span class="votes has-text-danger">Won With {{ arc.get_upvotes.length }} Votes</span>
-          <span class="is-italic is-pulled-right">
-            Written by: {{ arc.user.nickname }}
-          </span>
-        </header>
-        <div class="message-body">
-          {{ arc.body }} ...
+    </div>
+      <h2 class="subtitle has-text-light">The story continued...</h2>
+      <div class="columns is-multiline" v-for="arc in arcs" :key="arc.id">
+        <div class="column is-full" v-if="(arc.inscribed)">
+          <div class="message">
+            <header class="message-header">
+              <span class="votes has-text-danger">Won With {{ arc.get_upvotes.length }} Votes on {{ arc.winning_time }}</span>
+              <span class="is-italic is-pulled-right">
+                Written by: {{ arc.user.nickname }}
+              </span>
+            </header>
+            <div class="message-body">
+              {{ arc.body }} ...
+            </div>
+          </div>
         </div>
-       </div>
-      <div class="container">
-        <h2 class="subtitle has-text-light" v-if="(!arc.expired)">How will the story continue?</h2>
-          <div class="message is-warning" v-if="(!arc.expired)">
+        <div class="column is-full" v-if="(!arc.inscribed)">
+          <div class="message is-warning">
             <header class="message-header">
               <p class="message-header-title has-text-centered"> 
-                <i class="far fa-eye icon"></i><span class="clickable" @click="showStory(arc.story)">See the full story!</span>
                 <i class="fab fa-readme icon"></i><span class="clickable" @click="showArc(arc)">Read the Story-Arc</span>
               </p>
               <span class="has-text-danger"><i class="fas fa-clock icon"></i>{{ arc.time_left }}</span>
@@ -48,7 +52,6 @@
             </div>
           <span class="mobile-clickable" @click="showArc(arc)">Read the Story-Arc</span>
         </div>
-       </div>
       </div>
     </div>
   </section>
@@ -66,7 +69,8 @@ export default {
   data() {
     return {
       story: "",
-      arcs: ""
+      arcs: "",
+      loading: true
     };
   },
   created() {
@@ -80,6 +84,7 @@ export default {
       .get(`/stories/${this.$route.params.id}/arcs/`)
       .then(response => {
         this.arcs = response.data;
+        this.loading = false;
       })
       .catch(error => this.setError((error, "Something went wrong")));
   },

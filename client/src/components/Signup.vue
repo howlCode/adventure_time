@@ -1,4 +1,5 @@
 <template>
+  <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
   <form class="form-signup" @submit.prevent="signup">
     <div class="help is-danger" v-if="error">{{ error }}</div>
     <div class="field">
@@ -30,6 +31,7 @@
       <router-link to="/signin" class="has-text-success">Sign in</router-link>
     </div>
   </form>
+  </transition>
 </template>
 
 <script>

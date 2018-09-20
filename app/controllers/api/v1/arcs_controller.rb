@@ -88,6 +88,7 @@ module Api
         def arc_params
           params.require(:arc).permit(:body, :story_id)
         end
+
     end
   end
 end

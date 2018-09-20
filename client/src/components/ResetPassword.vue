@@ -1,4 +1,5 @@
 <template>
+  <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
   <form class="form-reset-password" @submit.prevent="reset">
     <div class="help is-info" v-if="notice">{{ notice }}</div>
     <div class="help is-danger" v-if="error">{{ error }}</div>
@@ -19,6 +20,7 @@
       <router-link to="/singin" class="has-text-info">Sign in</router-link>
     </div>
   </form>
+  </transition>
 </template>
 
 <script>

@@ -4,4 +4,5 @@ class Story < ApplicationRecord
   has_many :arcs, dependent: :destroy
   validates :title, :body, presence: true
   validates :title , uniqueness: true
+
 end

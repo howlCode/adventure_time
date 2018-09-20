@@ -1,5 +1,6 @@
 <template>
   <section class="section">
+    <transition appear enter-active-class="animated fadeIn">
     <div class="container">
       <div class="message">
         <header class="message-header">
@@ -11,6 +12,7 @@
         </div>
       </div>
     </div>
+    </transition>
   </section>
 </template>
 

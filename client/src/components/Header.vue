@@ -12,7 +12,7 @@
       <div class="navbar-menu" :class="{ 'is-active': showNav }">
         <div class="navbar-start">
           <i class="far fa-thumbs-up nav-icon has-text-primary"></i>
-          <router-link class="navbar-item" to="/">Vote on New Story-Arcs!</router-link>
+          <router-link class="navbar-item" to="/new-arcs">Vote on New Story-Arcs!</router-link>
           <i class="far fa-eye nav-icon has-text-info"></i>
           <router-link class="navbar-item" to="/stories">See All Stories</router-link>
           <i class="fas fa-edit nav-icon has-text-danger"></i>

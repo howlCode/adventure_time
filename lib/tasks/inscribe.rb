@@ -5,7 +5,7 @@ module Inscribe
     votes = []
 
     all_arcs.each do |arc|
-      if arc.expiry < Time.now 
+      if arc.expiry.to_date == DateTime.yesterday.in_time_zone(Time.zone).to_date
         # Date.current.end_of_day.in_time_zone(Time.zone)
         current_arcs.push(arc)
       end

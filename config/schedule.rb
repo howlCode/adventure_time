@@ -18,6 +18,10 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 1.day, at: ['11:59 pm'] do
+every 1.day, at: ['12:01 am'] do
   runner "rake RAILS_ENV=development adventuretime:inscribe"
+end
+
+every 1.day, at: ['12:01 am'] do
+  runner "rake RAILS_ENV=production adventuretime:inscribe"
 end

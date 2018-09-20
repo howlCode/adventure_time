@@ -5,6 +5,6 @@ namespace :adventuretime do
   desc "Determine winning story-arcs for the day"
   task inscribe: :environment do
     puts "Selecting winners..."
-    inscribe
+    puts inscribe
   end
 end

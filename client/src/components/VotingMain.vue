@@ -2,8 +2,8 @@
   <transition appear enter-active-class="animated fadeIn">
   <section class="section">
     <div class="has-text-centered" v-if="noArcs()">
-      <h1 class="title has-text-light" v-if="noArcs()">No Story-Arcs to Vote On!</h1>
-      <router-link to="/stories" class="has-text-primary subtitle" v-if="noArcs()">Get Writing!</router-link>
+      <h1 class="title has-text-light">No Story-Arcs to Vote On!</h1>
+      <router-link to="/stories" class="has-text-primary subtitle">Get Writing!</router-link>
     </div>
     <div class="columns is-multiline">
       <div class="column is-full" v-for="arc in arcs" :key="arc.id" v-if="!isExpired(arc)">
@@ -72,7 +72,13 @@ export default {
       return arc.expired;
     },
     noArcs() {
-      if (this.arcs.length === 0) {
+      let expired = [];
+      this.arcs.map(arc => {
+        if (arc.expired == true) {
+          expired.push(arc);
+        }
+      });
+      if (this.arcs.length === 0 || this.arcs.length === expired.length) {
         return true;
       }
     }

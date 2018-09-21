@@ -3,6 +3,7 @@ module Inscribe
     all_arcs = arcs
     current_arcs = []
     votes = []
+    winners = []
 
     all_arcs.each do |arc|
       if arc.expiry.to_date == DateTime.yesterday.in_time_zone(Time.zone).to_date
@@ -15,14 +16,25 @@ module Inscribe
     end
 
     win = votes.max
-
+  
     current_arcs.each do |arc|
       if arc.get_upvotes.size == win
-        arc.inscribed = true
-        arc.save
+        winners.push(arc)
       else
         arc.delete
       end
     end
+
+    if winners.length > 1
+      winners.each do |w|
+        w.delete
+      end
+    else
+      winners.each do |w|
+        w.inscribed = true
+        w.save
+      end
+    end
+
   end
 end

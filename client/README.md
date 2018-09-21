@@ -1,3 +1,5 @@
 # inscribed-vue
 
-> A frontend for RAILS api
+## What is it?
+
+A front-end for [Inscribed](https://github.com/howlCode/inscribed) created in Vue.js.

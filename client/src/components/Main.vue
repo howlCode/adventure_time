@@ -4,7 +4,7 @@
     <h1 class="title has-text-light">Welcome to Inscribed!</h1>
     </transition>
     <h2 class="subtitle has-text-light">Where Creativity and Community Meet</h2>
-    <router-link v-if="!isSignedIn()" to="/signup" class="has-text-info">Sign Up Here</router-link>
+    <p class="margin-bottom"><router-link v-if="!$isSignedIn()" to="/signup" class="button is-small is-info">Sign Up Here</router-link></p>
     <transition appear enter-active-class="animated slideInUp">
       <div class="columns is-multiline">
         <div class="column is-full" v-for="story in stories" :key="story.id">     
@@ -19,7 +19,7 @@
               </p>
             </header>
             <div class="message-body">
-              <p>{{ textTruncate(story.body, 175) }}</p>
+              <p>{{ $textTruncate(story.body, 175) }}</p>
               <span class="is-italic has-text-info">
                 Written by: {{ story.user.nickname }}
               </span>
@@ -53,11 +53,6 @@ export default {
         (error.response && error.response.data && error.response.data.error) ||
         text;
     },
-    textTruncate(str, len, end) {
-      if (!len && !end) return str;
-      end = end || "...";
-      return str.substr(0, len - end.length) + end;
-    },
     showStory(story) {
       const storyId = story.id;
       this.$router.push({
@@ -67,9 +62,6 @@ export default {
     newArc() {
       const storyId = this.story.id;
       this.$router.push({ path: `/story/${storyId}/new-arc` });
-    },
-    isSignedIn() {
-      return this.$store.getters.isSignedIn;
     }
   }
 };
@@ -78,5 +70,8 @@ export default {
 <style lang="css">
 .vote-text {
   font-size: 1.2rem;
+}
+.margin-bottom {
+  margin-bottom: 10px;
 }
 </style>

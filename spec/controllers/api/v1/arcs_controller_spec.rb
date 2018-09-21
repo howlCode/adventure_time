@@ -138,6 +138,10 @@ RSpec.describe Api::V1::ArcsController, type: :controller do
       }.to change(arc.get_upvotes, :size).by(1)
       expect(response).to have_http_status(:ok)
     end
+  end
+
+  describe 'PUT #downvote' do
+    let!(:arc) { create(:arc, story: story, user: user) }
 
     it 'registers a downvote' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
@@ -148,4 +152,5 @@ RSpec.describe Api::V1::ArcsController, type: :controller do
       expect(response).to have_http_status(:ok)
     end
   end
+
 end

@@ -10,6 +10,7 @@ import StoryArcs from "@/components/StoryArcs";
 import StoryForm from "@/components/StoryForm";
 import Arc from "@/components/Arc";
 import ArcForm from "@/components/ArcForm";
+import UserProfile from "@/components/UserProfile";
 
 import ForgotPassword from "@/components/ForgotPassword";
 import ResetPassword from "@/components/ResetPassword";
@@ -73,6 +74,11 @@ export default new Router({
       path: "/password_resets/:token",
       name: "ResetPassword",
       component: ResetPassword
+    },
+    {
+      path: "/profile/:id",
+      name: "UserProfile",
+      component: UserProfile
     }
   ]
 });

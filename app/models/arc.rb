@@ -21,7 +21,7 @@ class Arc < ApplicationRecord
   end
 
   def time_left
-    self.expiry.strftime("Voting closes tonight after %I:%M%p")
+    self.expiry.strftime("Voting closes tonight at %I:%M%p")
   end
 
   def winning_time

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isSignedIn()" class="is-pulled-right">
+  <div v-if="$isSignedIn()" class="is-pulled-right">
     <transition appear enter-active-class="animated fadeIn">
     <span class="help is-danger msg" v-if="errors">{{ errors }}</span>
     </transition>
@@ -51,9 +51,6 @@ export default {
     },
     isExpired(arc) {
       return arc.expired;
-    },
-    isSignedIn() {
-      return this.$store.getters.isSignedIn;
     }
   }
 };

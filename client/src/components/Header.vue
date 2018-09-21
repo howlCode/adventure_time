@@ -20,8 +20,8 @@
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
-            <button v-if="isSignedIn()" class="button is-light" @click="signOut()">Sign out</button>
-            <router-link v-if="!isSignedIn()" class="button is-primary" to="/signin">Sign in</router-link>
+            <button v-if="$isSignedIn()" class="button is-light" @click="signOut()">Sign out</button>
+            <router-link v-if="!$isSignedIn()" class="button is-primary" to="/signin">Sign in</router-link>
           </div>
         </div>
       </div>
@@ -48,9 +48,6 @@ export default {
           this.$router.replace("/");
         })
         .catch(error => this.setError(error, "Cannot sign out"));
-    },
-    isSignedIn() {
-      return this.$store.getters.isSignedIn;
     },
     setError(error, text) {
       this.error =

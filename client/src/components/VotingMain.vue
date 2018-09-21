@@ -1,9 +1,13 @@
 <template>
   <transition appear enter-active-class="animated fadeIn">
   <section class="section">
+    <div class="has-text-centered" v-if="noArcs()">
+      <h1 class="title has-text-light" v-if="noArcs()">No Story-Arcs to Vote On!</h1>
+      <router-link to="/stories" class="has-text-primary subtitle" v-if="noArcs()">Get Writing!</router-link>
+    </div>
     <div class="columns is-multiline">
-      <div class="column is-full" v-for="arc in arcs" :key="arc.id">
-        <div class="message" v-if="!isExpired(arc)">
+      <div class="column is-full" v-for="arc in arcs" :key="arc.id" v-if="!isExpired(arc)">
+        <div class="message">
           <header class="message-header">
             <p class="message-header-title has-text-centered"> 
               <i class="far fa-eye icon"></i><span class="clickable" @click="showStory(arc.story)">See the full story!</span>
@@ -12,7 +16,7 @@
             <span class="has-text-warning"><i class="fas fa-clock icon"></i>{{ arc.time_left }}</span>
           </header>
           <div class="message-body">
-            <p>{{ textTruncate(arc.body, 175) }}</p>
+            <p>{{ $textTruncate(arc.body, 175) }}</p>
             <span class="is-italic has-text-info">
               Written by: {{ arc.user.nickname }}
             </span>
@@ -52,11 +56,6 @@ export default {
         (error.response && error.response.data && error.response.data.error) ||
         text;
     },
-    textTruncate(str, len, end) {
-      if (!len && !end) return str;
-      end = end || "...";
-      return str.substr(0, len - end.length) + end;
-    },
     showArc(arc) {
       const storyId = arc.story.id;
       this.$router.push({ path: `/stories/${storyId}/arcs/${arc.id}` });
@@ -69,11 +68,13 @@ export default {
       const storyId = story.id;
       this.$router.push({ path: `/stories/${storyId}` });
     },
-    isSignedIn() {
-      return this.$store.getters.isSignedIn;
-    },
     isExpired(arc) {
       return arc.expired;
+    },
+    noArcs() {
+      if (this.arcs.length === 0) {
+        return true;
+      }
     }
   },
   components: {

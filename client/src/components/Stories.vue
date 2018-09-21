@@ -1,6 +1,9 @@
 <template>
+  <transition appear enter-active-class="animated slideInUp">
   <section class="section">
-    <transition appear enter-active-class="animated slideInUp">
+      <div class="has-text-centered" v-if="noStories()">
+        <h1 class="title has-text-light">Loading...</h1>
+      </div>
       <div class="columns is-multiline">
         <div class="column is-full" v-for="story in stories" :key="story.id">     
           <div class="message hover-story" @click="showStory(story)">
@@ -14,7 +17,7 @@
               </p>
             </header>
             <div class="message-body">
-              <p>{{ textTruncate(story.body, 175) }}</p>
+              <p>{{ $textTruncate(story.body, 175) }}</p>
               <span class="is-italic has-text-info">
                 Written by: {{ story.user.nickname }}
               </span>
@@ -22,8 +25,8 @@
           </div>
         </div>
       </div>
-    </transition>
   </section>
+  </transition>
 </template>
 
 <script>
@@ -48,11 +51,6 @@ export default {
         (error.response && error.response.data && error.response.data.error) ||
         text;
     },
-    textTruncate(str, len, end) {
-      if (!len && !end) return str;
-      end = end || "...";
-      return str.substr(0, len - end.length) + end;
-    },
     showStory(story) {
       const storyId = story.id;
       this.$router.push({
@@ -62,6 +60,11 @@ export default {
     newArc() {
       const storyId = this.story.id;
       this.$router.push({ path: `/story/${storyId}/new-arc` });
+    },
+    noStories() {
+      if (this.stories.length === 0) {
+        return true;
+      }
     }
   }
 };

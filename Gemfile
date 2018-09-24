@@ -6,7 +6,6 @@ ruby '2.5.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # gem 'jbuilder', '~> 2.5'
@@ -27,9 +26,10 @@ gem 'whenever', require: false
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'capistrano', '~> 3.7', '>= 3.7.1'
-gem 'capistrano-rails', '~> 1.2'
-gem 'capistrano-passenger', '~> 0.2.0'
-gem 'capistrano-rbenv', '~> 2.1'
+gem 'capistrano-rails'
+gem 'capistrano-passenger'
+gem 'capistrano-rbenv'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
@@ -47,11 +47,16 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'whenever', require: false
+  gem 'sqlite3'
 end
 
 group :test do
   gem 'database_cleaner'
   gem 'faker'
+end
+
+group :production do
+  gem 'pg'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

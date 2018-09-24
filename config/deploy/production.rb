@@ -7,6 +7,7 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 server '159.65.36.241', user: 'deploy', roles: %w{app db web}
+append :linked_files, "config/database.yml", "config/master.key"
 
 # role-based syntax
 # ==================

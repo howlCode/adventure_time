@@ -91,7 +91,7 @@ GEM
     ffi (1.9.25)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    i18n (1.0.1)
+    i18n (1.1.0)
       concurrent-ruby (~> 1.0)
     jsonapi-renderer (0.2.0)
     jwt (2.1.0)
@@ -216,9 +216,9 @@ DEPENDENCIES
   bcrypt
   bootsnap (>= 1.1.0)
   capistrano (~> 3.7, >= 3.7.1)
-  capistrano-passenger (~> 0.2.0)
-  capistrano-rails (~> 1.2)
-  capistrano-rbenv (~> 2.1)
+  capistrano-passenger
+  capistrano-rails
+  capistrano-rbenv
   database_cleaner
   factory_bot_rails
   faker

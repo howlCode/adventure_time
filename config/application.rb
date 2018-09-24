@@ -21,6 +21,7 @@ module AdventureTime
     
         resource '*',
           headers: :any,
+          credentials: true,
           methods: [:get, :post, :put, :patch, :delete, :options, :head]
       end
     end

@@ -1,39 +1,37 @@
 module Inscribe
   def inscribe(arcs)
-    all_arcs = arcs
-    current_arcs = []
     votes = []
+    story_ids = []
+    draws = []
     winners = []
+    losers = []
 
-    all_arcs.each do |arc|
-      if arc.expiry.to_date == DateTime.yesterday.in_time_zone(Time.zone).to_date
-        current_arcs.push(arc)
-      end
-    end
-
-    current_arcs.each do |arc|
+    arcs.each do |arc|
       votes.push(arc.get_upvotes.size)
+      story_ids.push(arc.story.id)
     end
 
-    win = votes.max
-  
-    current_arcs.each do |arc|
-      if arc.get_upvotes.size == win
-        winners.push(arc)
+    winners = arcs.select { |arc| arc.get_upvotes.size == votes.max }
+    losers = arcs.select { |arc| arc.get_upvotes.size < votes.max || arc.get_upvotes.size == 0 }
+
+
+    winners.each do |winner|
+      if story_ids.uniq[winner.story.id]
+        draws.push(winner)
       else
-        arc.delete
+        winner.inscribed = true
+        winner.save
+        puts winner
       end
     end
 
-    if winners.length > 1
-      winners.each do |w|
-        w.delete
-      end
-    else
-      winners.each do |w|
-        w.inscribed = true
-        w.save
-      end
+    losers.each do |loser|
+      loser.delete
+    end
+
+    draws.each do |draw|
+      draw.expiry.to_date == DateTime.now.end_of_day.in_time_zone(Time.zone).to_date
+      draw.save
     end
 
   end

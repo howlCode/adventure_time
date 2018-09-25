@@ -1,7 +1,10 @@
 import Vue from "vue";
+
 import Router from "vue-router";
-import Signin from "@/components/Signin";
-import Signup from "@/components/Signup";
+import Signin from "@/components/auth/Signin";
+import Signup from "@/components/auth/Signup";
+import ForgotPassword from "@/components/auth/ForgotPassword";
+import ResetPassword from "@/components/auth/ResetPassword";
 
 import Main from "@/components/Main";
 import VotingMain from "@/components/VotingMain";
@@ -11,9 +14,6 @@ import StoryForm from "@/components/StoryForm";
 import Arc from "@/components/Arc";
 import ArcForm from "@/components/ArcForm";
 import UserProfile from "@/components/UserProfile";
-
-import ForgotPassword from "@/components/ForgotPassword";
-import ResetPassword from "@/components/ResetPassword";
 
 Vue.use(Router);
 

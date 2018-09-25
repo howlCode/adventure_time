@@ -7,8 +7,6 @@
     <h2 class="subtitle has-text-light">The story began...
     <button @click="newArc" class="button is-primary is-pulled-right is-hidden-mobile">Submit a New Story-Arc</button></h2>
     <button @click="newArc" class="button is-small is-primary is-shown-mobile">Submit New Story-Arc</button>
-    <div class="columns is-multiline">
-      <div class="column is-full">
         <div class="message">
           <header class="message-header">
             <p class="message-header-title">{{ story.title }}</p>
@@ -20,8 +18,6 @@
             <p>{{ story.body }}</p>
           </div>
         </div>
-      </div>
-    </div>
       <h2 class="subtitle has-text-light" v-if="!noArcs()">The story continued...</h2>
       <div class="columns is-multiline" v-if="!noArcs()" v-for="arc in arcs" :key="arc.id">
         <div class="column is-full" v-if="(arc.inscribed)">
